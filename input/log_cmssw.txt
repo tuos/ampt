@@ -1,0 +1,28 @@
+cmsDriver.py MinBias_13TeV_pythia8_TuneCUETP8M1_cfi  --conditions auto:phase1_2018_realistic -n 10 --era Run2_2018 --eventcontent RAWSIM  -s GEN,SIM --datatier GEN-SIM --beamspot Realistic25ns13TeVEarly2017Collision --geometry DB:Extended --fileout file:step1.root
+
+===modified===
+cmsDriver.py MinBias_13TeV_pythia8_TuneCUETP8M1_cfi  --conditions auto:phase1_2018_realistic -n 10 --eventcontent RAWSIM  -s GEN --datatier GEN --fileout file:step1.root
+===final===
+cmsDriver.py MinBias_13TeV_pythia8_TuneCUETP8M1_cfi -s GEN --eventcontent RAWSIM --datatier GEN --conditions auto:phase1_2018_realistic -n 100 --no_exec --fileout file:step1.root
+
+
+=============
+# https://twiki.cern.ch/twiki/bin/view/CMS/PPb8TeVOfficialMC
+# https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_fragment/HIN-pPb816Spring16GS-00026/0
+=====hijing=====
+cmsDriver.py ./hijing_cfi.py -s GEN --eventcontent RAWSIM --datatier GEN --conditions auto:phase1_2018_realistic -n 100 --no_exec --fileout file:step1_hijing.root
+==> not working <==
+
+====this one works=====
+cmsDriver.py Hijing_PPb_MinimumBias_cfi -s GEN --eventcontent RAWSIM --datatier GEN --conditions auto:phase1_2018_realistic -n 100 --no_exec --fileout file:step1_hijing.root
+=====but need some additional wrok=====
+
+
+=============
+=====ampt=====
+cmsDriver.py AMPT_PPb_5020GeV_MinimumBias_cfi -s GEN --eventcontent RAWSIM --datatier GEN --conditions auto:phase1_2018_realistic -n 2 --no_exec --fileout file:step1_ampt.root
+=====working but need to change to pp collisions and others like random number gen=====
+
+# 500kb for 100 evts; 5MB for 1k,
+
+
