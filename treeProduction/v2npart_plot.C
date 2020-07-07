@@ -88,7 +88,7 @@ void v2npart_plot() {
     tex4->SetTextColor(1);
     tex4->SetTextSize(0.05);
     tex4->SetTextFont(42);
-    tex4->Draw();
+    //tex4->Draw();
 
 
   c1->Print("eventplane_v2npart.png");
