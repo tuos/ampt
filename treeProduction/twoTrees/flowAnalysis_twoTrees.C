@@ -189,6 +189,10 @@ void flowAnalysis_twoTrees(){
       } 
 
       TCanvas *c1 = new TCanvas("c1","c1",1,1,650,550);
+      hist2Dx_y->SetXTitle("x (fm)");
+      hist2Dx_y->SetYTitle("y (fm)"); 
+      hist2Dx_y->GetXaxis()->CenterTitle(1);
+      hist2Dx_y->GetYaxis()->CenterTitle(1);     
       hist2Dx_y->Draw("box");
       c1->SaveAs("plot_hist2Dx_y.pdf");
 
