@@ -16,11 +16,11 @@ void ROOT_Two_Trees(){
     Float_t bTree;
     Float_t ptTree[maxMultiplicity], etaTree[maxMultiplicity], phiTree[maxMultiplicity];
     
-    const string inputFileName = "/scratch/tuos/models/reu2020/slurm/jb0/ana/ampt.dat";
+    const string inputFileName = "/scratch/tuos/models/reu2020/slurm/job/ana/ampt.dat";
     ifstream inputFile;
     inputFile.open(inputFileName);
     
-    TFile *hadronTreeFile = new TFile("tree_hadrons_ampt_new_jb0_cuts.root", "RECREATE");
+    TFile *hadronTreeFile = new TFile("trees_hadrons_participants_ampt_jb0_cuts.root", "RECREATE");
     TTree *hadronTree = new TTree("hadronTree", "Tree with hadron output from AMPT");
     hadronTree->Branch("nMultiplicityTree", &nMultiplicityTree, "nMultiplicityTree/I");
     hadronTree->Branch("nPartTree", &nPartTree, "nPartTree/I");
@@ -70,11 +70,85 @@ void ROOT_Two_Trees(){
     }
     inputFile.close();
     
-    hadronTree->Write();
-    
-    cout<<"Done!"<<endl;
-    cout<<"Number of events saved to the ROOT tree is :" <<nEvent<<endl;
+    //hadronTree->Write();
+
+    cout<<"Done for hadron tree!"<<endl;
+    cout<<"Number of events saved to the hadron tree is :" <<nEvent<<endl;
     cout<<"The input file is : "<<inputFileName<<endl;
+     
+    cout<<endl<<"Start working on the participant tree"<<endl;
+    //Including positions of participants
+    int nEvent2 = 0;
+    const int maxNucleons = 208;
+    int nNucleonsProjectile, nNucleonsTarget;
+    float xProjectile[maxNucleons];
+    float yProjectile[maxNucleons];
+    int statusProjectile[maxNucleons];
+    float xTarget[maxNucleons];
+    float yTarget[maxNucleons];
+    int statusTarget[maxNucleons];
+
+    Int_t nNucleonsProjectileTree, nNucleonsTargetTree;
+    Float_t xProjectileTree[maxNucleons];
+    Float_t yProjectileTree[maxNucleons];
+    Int_t statusProjectileTree[maxNucleons];
+    Float_t xTargetTree[maxNucleons];
+    Float_t yTargetTree[maxNucleons];
+    Int_t statusTargetTree[maxNucleons];
+
+    const string inputFileName2 = "/scratch/tuos/models/reu2020/slurm/job/ana/npart-xy.dat";
+    ifstream inputFile2;
+    inputFile2.open(inputFileName2);
+
+    TTree *participantTree = new TTree("participantTree", "Tree with initial nucleon positions from AMPT");
+    participantTree->Branch("nNucleonsProjectileTree", &nNucleonsProjectileTree, "nNucleonsProjectileTree/I");
+    participantTree->Branch("xProjectileTree", &xProjectileTree, "xProjectileTree[nNucleonsProjectileTree]/F");
+    participantTree->Branch("yProjectileTree", &yProjectileTree, "yProjectileTree[nNucleonsProjectileTree]/F");
+    participantTree->Branch("statusProjectileTree", &statusProjectileTree, "statusProjectileTree[nNucleonsProjectileTree]/I");
+    participantTree->Branch("nNucleonsTargetTree", &nNucleonsTargetTree, "nNucleonsTargetTree/I");
+    participantTree->Branch("xTargetTree", &xTargetTree, "xTargetTree[nNucleonsTargetTree]/F");
+    participantTree->Branch("yTargetTree", &yTargetTree, "yTargetTree[nNucleonsTargetTree]/F");
+    participantTree->Branch("statusTargetTree", &statusTargetTree, "statusTargetTree[nNucleonsTargetTree]/I");
+
+    while (inputFile2>>nEvent2){
+        inputFile2>>tmp;
+        inputFile2>>nNucleonsProjectileTree; 
+        inputFile2>>nNucleonsTargetTree;
+        inputFile2>>tmp;
+        for(int i=0; i<nNucleonsProjectileTree; i++){
+            inputFile2>>xProjectileTree[i]; 
+            inputFile2>>yProjectileTree[i]; 
+            inputFile2>>tmp;
+            inputFile2>>statusProjectileTree[i]; 
+            inputFile2>>tmp;
+            inputFile2>>tmp;
+            inputFile2>>tmp;
+        }
+        for(int i=0; i<nNucleonsTargetTree; i++){
+            inputFile2>>xTargetTree[i];
+            inputFile2>>yTargetTree[i];
+            inputFile2>>tmp;
+            inputFile2>>statusTargetTree[i];
+            inputFile2>>tmp;
+            inputFile2>>tmp;
+            inputFile2>>tmp;
+        }        
+        
+        participantTree->Fill();
+        
+        if(nEvent2%1==0) cout<<"Processed "<<nEvent2<<" events"<<endl;
+    }
+    inputFile2.close();
+    
+    //participantTree->Write();
+
+
+    hadronTreeFile->Write();
+   
+    cout<<"Done!"<<endl;
+    cout<<"Number of events saved to the participant tree is :" <<nEvent2<<endl;
+    cout<<"The input file is : "<<inputFileName2<<endl;
+
     
 }
 //
@@ -82,6 +156,6 @@ void ROOT_Two_Trees(){
 //
 //  Created by Sofia Panomitros on 7/1/19.
 //
-//  Updated by Shengquan and Everett in 2020
+//  Updated by Shengquan and Everett in summer 2020
 //
 
