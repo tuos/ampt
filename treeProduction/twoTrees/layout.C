@@ -76,7 +76,7 @@ void layout(){
  hist->GetYaxis()->SetTitleSize(0.066);
  hist->GetXaxis()->SetLabelSize(0.05);
  hist->GetYaxis()->SetLabelSize(0.05);
- hist->Draw();
+ hist->Draw(" ");
 
    TEllipse *projectile = new TEllipse(xMean_projectile, yMean_projectile, 2.75);;
    projectile->SetLineWidth(2);
