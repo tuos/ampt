@@ -1,0 +1,10 @@
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_0.root
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_1.root
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_2.root
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_3.root
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_4.root
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_5.root
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_6.root
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_7.root
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_8.root
+/store/user/prichaew/slurmpc/jb0/trees_hadrons_participants_partons_jb0_9.root
