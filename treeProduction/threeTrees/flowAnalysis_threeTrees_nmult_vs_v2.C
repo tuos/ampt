@@ -16,6 +16,7 @@ void flowAnalysis_threeTrees_nmult_vs_v2(){
      long nEvt, nEvtProcess; 
 
      Int_t MultIndex;
+     Int_t MultBin;
      Int_t nParticle, iParticle;
      Float_t phi[20000];
      Float_t pt[20000];
@@ -43,15 +44,17 @@ void flowAnalysis_threeTrees_nmult_vs_v2(){
 
      
 
-     const int NB_SLICE_PT = 10;
-     //double minPtCut[NB_SLICE_PT] = {0.2,0.4,0.6,0.8,1.1,1.4,1.75,2.2,2.75,3.45,4.2,5.05,6.0,7.2,8.5};
-     //double maxPtCut[NB_SLICE_PT] = {0.4,0.6,0.8,1.1,1.4,1.75,2.2,2.75,3.45,4.2,5.05,6.0,7.2,8.5,1000}; //15 bins
-     TH1D *histEventPlaneRes[NB_SLICE_PT];   
-     TH1D *histV2EP[NB_SLICE_PT];
-     TH1D *histV2PtP[NB_SLICE_PT];
-     TH1D *histV2PnP[NB_SLICE_PT];
-     TH1D *histMult[NB_SLICE_PT];
-     for(int i=0; i<NB_SLICE_PT; i++){
+     const int NB_SLICE_MULT = 18;
+     double minMultCut[NB_SLICE_MULT] =  {0,5, 10, 15,20,25,30,35,40,45,50,70,90,110,130,150,170,190}; 
+     double maxMultCut[NB_SLICE_MULT] = {5,10,15,20,25,30,35,40,45,50,70,90,110,130,150,170,190,210}; //18 bins
+     //double minPtCut[NB_SLICE_MULT] = {0.2,0.4,0.6,0.8,1.1,1.4,1.75,2.2,2.75,3.45,4.2,5.05,6.0,7.2,8.5};
+     //double maxPtCut[NB_SLICE_MULT] = {0.4,0.6,0.8,1.1,1.4,1.75,2.2,2.75,3.45,4.2,5.05,6.0,7.2,8.5,1000}; //15 bins
+     TH1D *histEventPlaneRes[NB_SLICE_MULT];   
+     TH1D *histV2EP[NB_SLICE_MULT];
+     TH1D *histV2PtP[NB_SLICE_MULT];
+     TH1D *histV2PnP[NB_SLICE_MULT];
+     TH1D *histMult[NB_SLICE_MULT];
+     for(int i=0; i<NB_SLICE_MULT; i++){
        histV2EP[i] = new TH1D(Form("histV2EP_%d",i), "", 200,-1,1);
        histV2PtP[i] = new TH1D(Form("histV2PtP_%d",i), "", 200,-1,1);
        histV2PnP[i] = new TH1D(Form("histV2PnP_%d",i), "", 200,-1,1);  
@@ -61,7 +64,7 @@ void flowAnalysis_threeTrees_nmult_vs_v2(){
 
      TH2D *hist2Dx_y = new TH2D("hist2Dx_y","Nucleon position x vs y", 200, -10,10, 200,-10,10);
 
-     TFile inFile("./trees_testing.root", "read");
+     TFile inFile("/store/user/prichaew/finaloutputs/FINALCCOUTPUT.root", "read");
      TTree *t1 = (TTree*)inFile.Get("hadronTree");
      t1->SetBranchAddress("nMultiplicityTree", &nParticle);
      t1->SetBranchAddress("ptTree", &pt);
@@ -103,12 +106,14 @@ void flowAnalysis_threeTrees_nmult_vs_v2(){
      
      //t1->AddFriend("t2");
 
-     nEvt=t1->GetEntries();
+     //nEvt=t1->GetEntries();
+     nEvt=10000;
      //nEvtProcess=50;
      // first event loop for estimatig the event plane resolution
      for(long ne=0; ne<nEvt; ne++)
      {
        if(ne%2000==0)  cout<<"Have run "<<ne<<" of the total "<<nEvt<<" events; "<<endl;
+       //cout<<"ne = "<<ne<<" ; nParticle= "<<nParticle<<endl;
        t1->GetEntry(ne);
        t2->GetEntry(ne);
        
@@ -117,7 +122,16 @@ void flowAnalysis_threeTrees_nmult_vs_v2(){
        histQCosPlus->Reset();
        histQCosMinus->Reset();
 
-       MultIndex = (nParticle-1) / 20;
+       //MultIndex = (nParticle-1) / 20;
+
+       //finding multBin for each event
+       int multBin=-1;
+       for(int imult=0;imult<NB_SLICE_MULT;imult++){
+          if((nParticle>minMultCut[imult]&&nParticle<=maxMultCut[imult])){
+              multBin=imult;
+          }
+       }
+
 
       // if(ne==0){ //The first event
         // cout<<"nNucleonsProjectile = "<<nNucleonsProjectile<<endl;
@@ -149,8 +163,10 @@ void flowAnalysis_threeTrees_nmult_vs_v2(){
        }
 
        eventPlanePlus = 1.0/2*atan2(histQSinPlus->GetMean(), histQCosPlus->GetMean()); // EP in (-pi/2, pi/2);
+
        eventPlaneMinus = 1.0/2*atan2(histQSinMinus->GetMean(), histQCosMinus->GetMean()); // EP in (-pi/2, pi/2);
-       histEventPlaneRes[MultIndex]->Fill(cos(2*(eventPlanePlus - eventPlaneMinus)));
+
+       histEventPlaneRes[multBin]->Fill(cos(2*(eventPlanePlus - eventPlaneMinus)));
 
       } // end of the first event loop
       //cout<<"Event Plane resolution = "<<sqrt(histEventPlaneRes->GetMean())<<endl;
@@ -178,11 +194,20 @@ void flowAnalysis_threeTrees_nmult_vs_v2(){
        histTempPtP->Reset();
        histTempPnP->Reset();
 
-       MultIndex = (nParticle-1) / 20;
+       //MultIndex = (nParticle-1) / 20;
+
+       // finding the multBin for each event
+       int multBin=-1;
+       for(int imult=0;imult<NB_SLICE_MULT;imult++){
+          if((nParticle>minMultCut[imult]&&nParticle<=maxMultCut[imult])){
+              multBin=imult;
+          }
+       }
+                                                                    
 
        if(nParticle<0 || nParticle>200) continue;
 
-       histMult[MultIndex]->Fill(nParticle);
+       histMult[multBin]->Fill(nParticle);
 
        // estimating the participant plane angle
        for(int i=0; i<nNucleonsProjectile; i++){
@@ -226,35 +251,36 @@ void flowAnalysis_threeTrees_nmult_vs_v2(){
            }
         }
        eventPlanePlus = 1.0/2*atan2(histQSinPlus->GetMean(), histQCosPlus->GetMean()); // EP in (-pi/2, pi/2);
-       eventPlaneMinus = 1.0/2*atan2(histQSinMinus->GetMean(), histQCosMinus->GetMean()); // EP in (-pi/2, pi/2);        
+       eventPlaneMinus = 1.0/2*atan2(histQSinMinus->GetMean(), histQCosMinus->GetMean()); // EP in (-pi/2, pi/2);
+
        // calculating v2 for each event
        for(iParticle=0; iParticle<nParticle; iParticle++){
-         if(eta[iParticle]<-1.0||eta[iParticle]>1.0) continue;
-         //if(phi[iParticle]>3.141592653589793) phi[iParticle]=phi[iParticle]-2*3.141592653589793; 
          if(pt[iParticle]<0.2||pt[iParticle]>1000) continue;
 
-         //int ptBin=-1;
-         //for(int ipt=0;ipt<NB_SLICE_PT;ipt++){
-           //if((pt[iParticle]>minPtCut[ipt]&&pt[iParticle]<=maxPtCut[ipt])){
-             //ptBin=ipt;
-           //}
-         //}
+         histTempPtP->Fill(cos(2*(phi[iParticle] - Psipart)));
+         histTempPnP->Fill(cos(2*(phi[iParticle] - Psiparton)));
+
+         if(eta[iParticle]<-1.0||eta[iParticle]>1.0) continue;
+         //if(phi[iParticle]>3.141592653589793) phi[iParticle]=phi[iParticle]-2*3.141592653589793; 
+
+         int multBin=-1;
+         for(int imult=0;imult<NB_SLICE_MULT;imult++){
+           if((pt[iParticle]>minMultCut[imult]&&pt[iParticle]<=maxMultCut[imult])){
+             multBin=imult;
+           }
+         }
 
          if(eta[iParticle]>0){
            histTempEP->Fill(cos(2*(phi[iParticle] - eventPlaneMinus)));
-           histTempPtP->Fill(cos(2*(phi[iParticle] - Psipart)));
-           histTempPnP->Fill(cos(2*(phi[iParticle] - Psiparton)));
           }
          if(eta[iParticle]<0){
            histTempEP->Fill(cos(2*(phi[iParticle] - eventPlanePlus)));
-           histTempPtP->Fill(cos(2*(phi[iParticle] - Psipart)));
-           histTempPnP->Fill(cos(2*(phi[iParticle] - Psiparton)));
           }
         
        } // end of the particle loop
-       histV2EP[MultIndex]->Fill(histTempEP->GetMean());
-       histV2PtP[MultIndex]->Fill(histTempPtP->GetMean());
-       histV2PnP[MultIndex]->Fill(histTempPnP->GetMean());
+       histV2EP[multBin]->Fill(histTempEP->GetMean());
+       histV2PtP[multBin]->Fill(histTempPtP->GetMean());
+       histV2PnP[multBin]->Fill(histTempPnP->GetMean());
        //cout<<eventPlaneMinus<<"   "<<eventPlanePlus<<"   "<<Psipart<<"   "<<Psiparton<<endl;
 
 
@@ -268,7 +294,7 @@ void flowAnalysis_threeTrees_nmult_vs_v2(){
       output_nmultv2PtP.open("output_nmultv2PtP.txt");
       output_nmultv2PnP.open("output_nmultv2PnP.txt");
       Float_t error;
-      for(int i=0; i<NB_SLICE_PT; i++){     
+      for(int i=0; i<NB_SLICE_MULT; i++){     
        
          error = sqrt(pow((histV2EP[i]->GetMeanError()/(histEventPlaneRes[i]->GetMean())),2)+ pow((histV2EP[i]->GetMean()*histEventPlaneRes[i]->GetMeanError()/(pow((histEventPlaneRes[i]->GetMean()) ,2))),2));
         cout<<histMult[i]->GetMean()<<"   "<<histV2EP[i]->GetMean()/sqrt(fabs(histEventPlaneRes[i]->GetMean()))<<"   "<<error<<endl;
