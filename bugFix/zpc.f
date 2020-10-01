@@ -766,8 +766,6 @@ c
 
         implicit double precision (a-h, o-z)
         external ran1
-c-tuo
-        LOGICAL NotConservedZPC
         parameter (MAXPTN=400001)
         common /para1/ mul
 cc      SAVE /para1/
@@ -821,15 +819,14 @@ clin-6/06/02 local parton freezeout:
      &       xmfrz(MAXPTN), 
      &       tfrz(302), ifrz(MAXPTN), idfrz(MAXPTN), itlast
 cc      SAVE /frzprc/
+
+c-tuo-prichard-2020
+        LOGICAL NotConservedFlag
+        COMMON /NotConservedFlagHIJING/NotConservedFlag
+
         common /rndm3/ iseedp
 cc      SAVE /rndm3/
         common /para7/ ioscar,nsmbbbar,nsmmeson
-
-c tuo-9/2020:
-      COMMON/HPARNT/HIPR1(100),IHPR2(50),HINT1(100),IHNT2(50)
-      COMMON/HMAIN1/EATT,JATT,NATT,NT,NP,N0,N01,N10,N11
-
-
         COMMON /AREVT/ IAEVT, IARUN, MISS
         SAVE   
         iseed=iseedp
@@ -946,16 +943,11 @@ c     3/27/00-end
 
 clin-6/2009 write out initial parton information after string melting
 c     and after propagating to its format time:
-c tuo-9/2020
-           DENGYZPC=EATT/(IHNT2(1)*HINT1(6)+IHNT2(3)*HINT1(7))-1.0
-c           NotConserved=ABS(DENGYNEW).GT.HIPR1(43).AND.IHPR2(20).NE.0
-           NotConservedZPC=ABS(DENGYZPC).GT.0.0005
-     &       .AND.IHPR2(20).NE.0
-     &       .AND.(IHPR2(21).EQ.0).AND.(IHPR2(10).NE.0)
-           write(92,*) ' NotConservedZPC,EATT = ', NotConservedZPC,EATT
 
-           if((ioscar.eq.2.or.ioscar.eq.3)
-     &       .AND.(.NOT. NotConservedZPC)) then
+c-tuo-prichard-2020
+cc           if(ioscar.eq.2.or.ioscar.eq.3) then
+           if(ioscar.eq.2.or.ioscar.eq.3
+     &        .AND.(.NOT.NotConservedFlag)) then
               if(dmax1(abs(gx(i)),abs(gy(i)),
      1             abs(gz(i)),abs(ft(i))).lt.9999) then
 clin-8/2015:

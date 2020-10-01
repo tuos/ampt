@@ -315,6 +315,11 @@ clin-4/26/01 lepton and photon info:
      &       PXN(MAXIDL), PYN(MAXIDL), PZN(MAXIDL), EEN(MAXIDL),
      &       XMN(MAXIDL)
 cc      SAVE /NOPREC/
+
+c-tuo-prichard-2020
+        LOGICAL NotConservedFlag
+        COMMON /NotConservedFlagHIJING/NotConservedFlag
+
 clin-6/22/01:
         common /lastt/itimeh,bimp
 cc      SAVE /lastt/
@@ -1930,22 +1935,21 @@ clin-4/19/01 soft3:
  565    continue
 
         DENGY=EATT/(IHNT2(1)*HINT1(6)+IHNT2(3)*HINT1(7))-1.0
-c        IF(ABS(DENGY).GT.HIPR1(43).AND.IHPR2(20).NE.0
-        IF(ABS(DENGY).GT.0.0005.AND.IHPR2(20).NE.0
-     &     .AND.IHPR2(21).EQ.0) THEN
-         IF(IHPR2(10).NE.0) 
-     &        WRITE(6,*) 'Energy not conserved, repeat the event'
+
+c-tuo-prichard-2020
+        NotConservedFlag=ABS(DENGY).GT.0.0005.AND.IHPR2(20).NE.0
+     &       .AND.(IHPR2(21).EQ.0).AND.(IHPR2(10).NE.0)
+
+cc        IF(ABS(DENGY).GT.HIPR1(43).AND.IHPR2(20).NE.0
+cc     &     .AND.IHPR2(21).EQ.0) THEN
+cc         IF(IHPR2(10).NE.0) 
+       IF(NotConservedFlag) THEN
+         WRITE(6,*) 'Energy not conserved, repeat the event'
 c                call lulist(1)
          write(6,*) 'violated:EATT(GeV),NATT,B(fm)=',EATT,NATT,bimp
          GO TO 50
         ENDIF
         write(6,*) 'satisfied:EATT(GeV),NATT,B(fm)=',EATT,NATT,bimp
-c-tuo, 2020
-        write(6,*) ' IHPR2(10) = ', IHPR2(10)
-        write(6,*) ' ABS(DENGY).GT.HIPR1(43) ', ABS(DENGY),HIPR1(43)
-        write(6,*) ' IHPR2(20) = ', IHPR2(20)
-        write(6,*) ' IHPR2(21) = ', IHPR2(21)
-
         write(6,*) ' '
 c
 clin-4/2012 write out initial transverse positions of initial nucleons:

@@ -347,8 +347,6 @@ c
 c=======================================================================
       SUBROUTINE HTOP
 c
-c-tuo
-      LOGICAL NotConserved
       PARAMETER (MAXSTR=150001)
       PARAMETER (MAXPTN=400001)
       PARAMETER (MAXIDL=4001)
@@ -382,12 +380,7 @@ cc      SAVE /RNDF77/
      &     PXN(MAXIDL), PYN(MAXIDL), PZN(MAXIDL), EEN(MAXIDL),
      &     XMN(MAXIDL)
 cc      SAVE /NOPREC/
-
-c-tuo
       COMMON/HPARNT/HIPR1(100),IHPR2(50),HINT1(100),IHNT2(50)
-ccc      COMMON/HPARNT/HIPR1(100),IHPR2(10),HINT1(100),IHNT2(50)
-ccc      COMMON/HPARNT/HIPR1(100),IHPR2(10),HINT1(100),IHNT2(50)
-
 cc      SAVE /HPARNT/
 c     7/20/01: use double precision
 c     otherwise sometimes beta>1 and gamma diverge in lorenz():
@@ -406,14 +399,15 @@ clin-8/2015:
 c      DOUBLE PRECISION  vxp0,vyp0,vzp0
 c      common /precpa/ vxp0(MAXPTN), vyp0(MAXPTN), vzp0(MAXPTN)
 cc      SAVE /precpa/
+
+c-tuo-prichard-2020
+      LOGICAL NotConservedFlag
+      COMMON /NotConservedFlagHIJING/NotConservedFlag
+
       common /para7/ ioscar,nsmbbbar,nsmmeson
       COMMON /AREVT/ IAEVT, IARUN, MISS
       common/snn/efrm,npart1,npart2,epsiPz,epsiPt,PZPROJ,PZTARG
-c-tuo
-c      COMMON /HPARNT/IHPR2(10)
-
-      SAVE  
- 
+      SAVE   
 c
         npar=0
         nnozpc=0
@@ -446,20 +440,10 @@ c     mesons to be converted to q/qbar:
            enddo
 
 clin-6/2009:
-c tuo-9/2020:
-c           if((ioscar.eq.2.or.ioscar.eq.3).AND.IHPR2(10).EQ.0) then
-           DENGYNEW=EATT/(IHNT2(1)*HINT1(6)+IHNT2(3)*HINT1(7))-1.0
-c           NotConserved=ABS(DENGYNEW).GT.HIPR1(43).AND.IHPR2(20).NE.0
-c           LOGICAL NotConserved
-           NotConserved=ABS(DENGYNEW).GT.0.0005.AND.IHPR2(20).NE.0
-     &       .AND.(IHPR2(21).EQ.0).AND.(IHPR2(10).NE.0)
-
-           write(92,*) ' NotConserved,EATT = ', NotConserved,EATT
-     1          3*nsmbbbar+2*nsmmeson
-
-           if(((ioscar.eq.2).or.(ioscar.eq.3))
-     &       .AND.(.NOT. NotConserved)) then
-
+cc           if(ioscar.eq.2.or.ioscar.eq.3) then
+c-tuo-prichard-2020
+           if(ioscar.eq.2.or.ioscar.eq.3
+     &        .AND.(.NOT.NotConservedFlag)) then
               write(92,*) iaevt,miss,3*nsmbbbar+2*nsmmeson,
      1             nsmbbbar,nsmmeson,natt,natt-nsmbbbar-nsmmeson
            endif
