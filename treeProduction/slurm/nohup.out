@@ -1,0 +1,2669 @@
+ 
+           ##################################################
+           #      AMPT (A Multi-Phase Transport) model      #
+           #          Version 2.26t9b (StringMelting)       #
+           #               12/25/2018                       #
+           ##################################################
+            
+ # Read in NSEED in HIJING at run time (e.g. 20030819):
+ #   read in:      1143453
+
+
+          **************************************************
+          *     |      |       _______      /  ------/     *
+          *   ----- ------     |_____|     /_/     /       *
+          *    |||    /        |_____|      /    / |       *
+          *    /| |  /_/       /_______    /_  /    |      *
+          *   / |     / /     /  /  / |        -------     *
+          *     |    / /|       /  /  |     /     |        *
+          *     |   / /  |     /  /  _|    /   -------     *
+          *                                                *
+          **************************************************
+                                HIJING                      
+                 Heavy Ion Jet INteraction Generator        
+                                  by                        
+                      X. N. Wang  and  M. Gyulassy           
+                       Lawrence Berkeley Laboratory           
+
+
+     MDCY(C221,1)   changed from              1 to              0
+     MDCY(C313,1)   changed from              1 to              0
+     MDCY(C-313,1)  changed from              0 to              0
+     MDCY(C323,1)   changed from              1 to              0
+     MDCY(C-323,1)  changed from              0 to              0
+     MDCY(C311,1)   changed from              1 to              0
+     MDCY(C-311,1)  changed from              0 to              0
+     MDCY(C1114,1)  changed from              1 to              0
+     MDCY(C2114,1)  changed from              1 to              0
+     MDCY(C2214,1)  changed from              1 to              0
+     MDCY(C2224,1)  changed from              1 to              0
+     MDCY(C-1114,1) changed from              0 to              0
+     MDCY(C-2114,1) changed from              0 to              0
+     MDCY(C-2214,1) changed from              0 to              0
+     MDCY(C-2224,1) changed from              0 to              0
+     MDCY(C213,1)   changed from              1 to              0
+     MDCY(C-213,1)  changed from              0 to              0
+     MDCY(C113,1)   changed from              1 to              0
+     MDCY(C223,1)   changed from              1 to              0
+     MDCY(C333,1)   changed from              1 to              0
+     MDCY(C111,1)   changed from              1 to              0
+     MDCY(C310,1)   changed from              1 to              0
+     MDCY(C411,1)   changed from              1 to              0
+     MDCY(C-411,1)  changed from              0 to              0
+     MDCY(C421,1)   changed from              1 to              0
+     MDCY(C-421,1)  changed from              0 to              0
+     MDCY(C431,1)   changed from              1 to              0
+     MDCY(C-431,1)  changed from              0 to              0
+     MDCY(C511,1)   changed from              1 to              0
+     MDCY(C-511,1)  changed from              0 to              0
+     MDCY(C521,1)   changed from              1 to              0
+     MDCY(C-521,1)  changed from              0 to              0
+     MDCY(C531,1)   changed from              1 to              0
+     MDCY(C-531,1)  changed from              0 to              0
+     MDCY(C3122,1)  changed from              1 to              0
+     MDCY(C-3122,1) changed from              0 to              0
+     MDCY(C3112,1)  changed from              1 to              0
+     MDCY(C-3112,1) changed from              0 to              0
+     MDCY(C3212,1)  changed from              1 to              0
+     MDCY(C-3212,1) changed from              0 to              0
+     MDCY(C3222,1)  changed from              1 to              0
+     MDCY(C-3222,1) changed from              0 to              0
+     MDCY(C3312,1)  changed from              1 to              0
+     MDCY(C-3312,1) changed from              0 to              0
+     MDCY(C3322,1)  changed from              1 to              0
+     MDCY(C-3322,1) changed from              0 to              0
+     MDCY(C3334,1)  changed from              1 to              0
+     MDCY(C-3334,1) changed from              0 to              0
+     MDCY(C441,1)   changed from              1 to              0
+     MDCY(C443,1)   changed from              1 to              0
+     MDCY(C413,1)   changed from              1 to              0
+     MDCY(C-413,1)  changed from              0 to              0
+     MDCY(C423,1)   changed from              1 to              0
+     MDCY(C-423,1)  changed from              0 to              0
+     MDCY(C433,1)   changed from              1 to              0
+     MDCY(C-433,1)  changed from              0 to              0
+     MDCY(C4112,1)  changed from              1 to              0
+     MDCY(C-4112,1) changed from              0 to              0
+     MDCY(C4114,1)  changed from              1 to              0
+     MDCY(C-4114,1) changed from              0 to              0
+     MDCY(C4122,1)  changed from              1 to              0
+     MDCY(C-4122,1) changed from              0 to              0
+     MDCY(C4212,1)  changed from              1 to              0
+     MDCY(C-4212,1) changed from              0 to              0
+     MDCY(C4214,1)  changed from              1 to              0
+     MDCY(C-4214,1) changed from              0 to              0
+     MDCY(C4222,1)  changed from              1 to              0
+     MDCY(C-4222,1) changed from              0 to              0
+     MDCY(C4224,1)  changed from              1 to              0
+     MDCY(C-4224,1) changed from              0 to              0
+     MDCY(C4132,1)  changed from              1 to              0
+     MDCY(C-4132,1) changed from              0 to              0
+     MDCY(C4312,1)  changed from              1 to              0
+     MDCY(C-4312,1) changed from              0 to              0
+     MDCY(C4314,1)  changed from              1 to              0
+     MDCY(C-4314,1) changed from              0 to              0
+     MDCY(C4232,1)  changed from              1 to              0
+     MDCY(C-4232,1) changed from              0 to              0
+     MDCY(C4322,1)  changed from              1 to              0
+     MDCY(C-4322,1) changed from              0 to              0
+     MDCY(C4324,1)  changed from              1 to              0
+     MDCY(C-4324,1) changed from              0 to              0
+     MDCY(C4332,1)  changed from              1 to              0
+     MDCY(C-4332,1) changed from              0 to              0
+     MDCY(C4334,1)  changed from              1 to              0
+     MDCY(C-4334,1) changed from              0 to              0
+     MDCY(C551,1)   changed from              1 to              0
+     MDCY(C553,1)   changed from              1 to              0
+     MDCY(C513,1)   changed from              1 to              0
+     MDCY(C-513,1)  changed from              0 to              0
+     MDCY(C523,1)   changed from              1 to              0
+     MDCY(C-523,1)  changed from              0 to              0
+     MDCY(C533,1)   changed from              1 to              0
+     MDCY(C-533,1)  changed from              0 to              0
+     MDCY(C5112,1)  changed from              1 to              0
+     MDCY(C-5112,1) changed from              0 to              0
+     MDCY(C5114,1)  changed from              1 to              0
+     MDCY(C-5114,1) changed from              0 to              0
+     MDCY(C5122,1)  changed from              1 to              0
+     MDCY(C-5122,1) changed from              0 to              0
+     MDCY(C5212,1)  changed from              1 to              0
+     MDCY(C-5212,1) changed from              0 to              0
+     MDCY(C5214,1)  changed from              1 to              0
+     MDCY(C-5214,1) changed from              0 to              0
+     MDCY(C5222,1)  changed from              1 to              0
+     MDCY(C-5222,1) changed from              0 to              0
+     MDCY(C5224,1)  changed from              1 to              0
+     MDCY(C-5224,1) changed from              0 to              0
+          **************************************************
+          *                                                *
+          *         HIJING has been initialized at         *
+          *             Ecm =    8160.00 GeV/n             *
+          *                                                *
+          *        for P   (  1,  1) + A   (208, 82)       *
+          **************************************************
+  EVENT            1 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6863260               0           0
+ #impact parameter,nlop,ncolt=   9.25138187               1           1
+ In PYINIT: BEAM,TARGET= P               P               
+
+ ******** PYMAXI: summary of differential cross-section maximum search ********
+
+           ==========================================================
+           I                                      I                 I
+           I  ISUB  Subprocess name               I  Maximum value  I
+           I                                      I                 I
+           ==========================================================
+           I                                      I                 I
+           I   11   f + f' -> f + f'              I    3.5510E+01   I
+           I   12   f + fb -> f' + fb'            I    3.7489E-02   I
+           I   13   f + fb -> g + g               I    4.7897E-01   I
+           I   14   f + fb -> g + gamma           I    6.5877E-03   I
+           I   18   f + fb -> gamma + gamma       I    3.0382E-05   I
+           I   28   f + g -> f + g                I    4.4397E+02   I
+           I   29   f + g -> f + gamma            I    2.9391E-01   I
+           I   53   g + g -> f + fb               I    4.3308E+00   I
+           I   68   g + g -> g + g                I    9.3852E+02   I
+           I   81   q + qb -> Q + QB, massive     I    2.6896E-02   I
+           I   82   g + g -> Q + QB, massive      I    3.7244E+00   I
+           I                                      I                 I
+           ==========================================================
+ satisfied:EATT(GeV),NATT,B(fm)=   852725.875             280   9.25138187    
+  
+  EVENT            2 , RUN            1
+ #impact parameter,nlop,ncolt=   7.57447004               0           1
+ In PYINIT: BEAM,TARGET= P               N               
+
+ ******** PYMAXI: summary of differential cross-section maximum search ********
+
+           ==========================================================
+           I                                      I                 I
+           I  ISUB  Subprocess name               I  Maximum value  I
+           I                                      I                 I
+           ==========================================================
+           I                                      I                 I
+           I   11   f + f' -> f + f'              I    3.5457E+01   I
+           I   12   f + fb -> f' + fb'            I    3.7489E-02   I
+           I   13   f + fb -> g + g               I    4.7897E-01   I
+           I   14   f + fb -> g + gamma           I    6.3921E-03   I
+           I   18   f + fb -> gamma + gamma       I    2.8888E-05   I
+           I   28   f + g -> f + g                I    4.4397E+02   I
+           I   29   f + g -> f + gamma            I    2.8372E-01   I
+           I   53   g + g -> f + fb               I    4.3308E+00   I
+           I   68   g + g -> g + g                I    9.3852E+02   I
+           I   81   q + qb -> Q + QB, massive     I    2.6896E-02   I
+           I   82   g + g -> Q + QB, massive      I    3.7244E+00   I
+           I                                      I                 I
+           ==========================================================
+ satisfied:EATT(GeV),NATT,B(fm)=   852737.750             263   7.57447004    
+  
+  EVENT            3 , RUN            1
+ #impact parameter,nlop,ncolt=   1.19472349               0          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852676.250             918   1.19472349    
+  
+  EVENT            4 , RUN            1
+ #impact parameter,nlop,ncolt=   5.23478031               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852768.000             582   5.23478031    
+  
+  EVENT            5 , RUN            1
+ #impact parameter,nlop,ncolt=   10.9971790               0           0
+ #impact parameter,nlop,ncolt=   10.2683268               1           0
+ #impact parameter,nlop,ncolt=   2.46514702               2           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852654.125             540   2.46514702    
+  
+  EVENT            6 , RUN            1
+ #impact parameter,nlop,ncolt=   10.4348574               0           0
+ #impact parameter,nlop,ncolt=   6.16797113               1           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852680.625             517   6.16797113    
+  
+  EVENT            7 , RUN            1
+ #impact parameter,nlop,ncolt=   5.88296127               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852768.500             433   5.88296127    
+  
+  EVENT            8 , RUN            1
+ #impact parameter,nlop,ncolt=   9.39391518               0           0
+ #impact parameter,nlop,ncolt=   10.5570412               1           0
+ #impact parameter,nlop,ncolt=   2.47503638               2          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852676.625             742   2.47503638    
+  
+  EVENT            9 , RUN            1
+ #impact parameter,nlop,ncolt=   8.61025715               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852731.625             279   8.61025715    
+  
+  EVENT           10 , RUN            1
+ #impact parameter,nlop,ncolt=   5.39617920               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852705.438             496   5.39617920    
+  
+  EVENT           11 , RUN            1
+ #impact parameter,nlop,ncolt=   6.01302910               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.625             406   6.01302910    
+  
+  EVENT           12 , RUN            1
+ #impact parameter,nlop,ncolt=   7.17286825               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852621.875             525   7.17286825    
+  
+  EVENT           13 , RUN            1
+ #impact parameter,nlop,ncolt=   8.99400902               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852508.812             374   8.99400902    
+  
+  EVENT           14 , RUN            1
+ #impact parameter,nlop,ncolt=   4.90539217               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852618.688             601   4.90539217    
+  
+  EVENT           15 , RUN            1
+ #impact parameter,nlop,ncolt=   5.14946413               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852633.125             469   5.14946413    
+  
+  EVENT           16 , RUN            1
+ #impact parameter,nlop,ncolt=   6.88591003               0           0
+ #impact parameter,nlop,ncolt=   2.70832467               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852674.000             563   2.70832467    
+  
+  EVENT           17 , RUN            1
+ #impact parameter,nlop,ncolt=   4.06538868               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852727.750             722   4.06538868    
+  
+  EVENT           18 , RUN            1
+ #impact parameter,nlop,ncolt=   10.5100632               0           0
+ #impact parameter,nlop,ncolt=   8.73864651               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852683.750             280   8.73864651    
+  
+  EVENT           19 , RUN            1
+ #impact parameter,nlop,ncolt=   11.6641703               0           0
+ #impact parameter,nlop,ncolt=   6.66207314               1           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852710.875             614   6.66207314    
+  
+  EVENT           20 , RUN            1
+ #impact parameter,nlop,ncolt=   11.2631741               0           0
+ #impact parameter,nlop,ncolt=   10.8025742               1           0
+ #impact parameter,nlop,ncolt=   7.50757456               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.688             239   7.50757456    
+  
+  EVENT           21 , RUN            1
+ #impact parameter,nlop,ncolt=   6.55027819               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852747.188             640   6.55027819    
+  
+  EVENT           22 , RUN            1
+ #impact parameter,nlop,ncolt=   9.81694698               0           0
+ #impact parameter,nlop,ncolt=   11.1674566               1           0
+ #impact parameter,nlop,ncolt=   10.2032242               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852710.938             269   10.2032242    
+  
+  EVENT           23 , RUN            1
+ #impact parameter,nlop,ncolt=   4.29275894               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852578.562             620   4.29275894    
+  
+  EVENT           24 , RUN            1
+ #impact parameter,nlop,ncolt=   10.3842955               0           0
+ #impact parameter,nlop,ncolt=   8.49221325               1           0
+ #impact parameter,nlop,ncolt=   8.78888130               2           0
+ #impact parameter,nlop,ncolt=   9.04070950               3           0
+ #impact parameter,nlop,ncolt=   10.0812759               4           0
+ #impact parameter,nlop,ncolt=   8.17427731               5           0
+ #impact parameter,nlop,ncolt=   2.17272234               6           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.000             611   2.17272234    
+  
+  EVENT           25 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3009319               0           0
+ #impact parameter,nlop,ncolt=   7.42069435               1           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852641.625             285   7.42069435    
+  
+  EVENT           26 , RUN            1
+ #impact parameter,nlop,ncolt=   7.04823637               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852666.500             248   7.04823637    
+  
+  EVENT           27 , RUN            1
+ #impact parameter,nlop,ncolt=   9.76961327               0           0
+ #impact parameter,nlop,ncolt=   11.6593838               1           0
+ #impact parameter,nlop,ncolt=   11.2866154               2           0
+ #impact parameter,nlop,ncolt=   11.7140474               3           0
+ #impact parameter,nlop,ncolt=   4.18328619               4          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852603.750             651   4.18328619    
+  
+  EVENT           28 , RUN            1
+ #impact parameter,nlop,ncolt=   8.32783699               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.562             236   8.32783699    
+  
+  EVENT           29 , RUN            1
+ #impact parameter,nlop,ncolt=   6.77143240               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852731.062             579   6.77143240    
+  
+  EVENT           30 , RUN            1
+ #impact parameter,nlop,ncolt=   5.74443531               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852708.562             651   5.74443531    
+  
+  EVENT           31 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3974619               0           0
+ #impact parameter,nlop,ncolt=   3.26392961               1           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852585.000             708   3.26392961    
+  
+  EVENT           32 , RUN            1
+ #impact parameter,nlop,ncolt=   9.20735836               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.625             247   9.20735836    
+  
+  EVENT           33 , RUN            1
+ #impact parameter,nlop,ncolt=   9.41072178               0           0
+ #impact parameter,nlop,ncolt=   6.83968019               1           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852642.875             464   6.83968019    
+  
+  EVENT           34 , RUN            1
+ #impact parameter,nlop,ncolt=   11.2088022               0           0
+ #impact parameter,nlop,ncolt=   8.13234425               1           0
+ #impact parameter,nlop,ncolt=   2.08937454               2          14
+ satisfied:EATT(GeV),NATT,B(fm)=   852817.000             672   2.08937454    
+  
+  EVENT           35 , RUN            1
+ #impact parameter,nlop,ncolt=   8.46760559               0           0
+ #impact parameter,nlop,ncolt=   3.98853040               1           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852784.062             642   3.98853040    
+  
+  EVENT           36 , RUN            1
+ #impact parameter,nlop,ncolt=   5.78972054               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852732.875             408   5.78972054    
+  
+  EVENT           37 , RUN            1
+ #impact parameter,nlop,ncolt=   2.06626678               0          16
+ satisfied:EATT(GeV),NATT,B(fm)=   852949.312             866   2.06626678    
+  
+  EVENT           38 , RUN            1
+ #impact parameter,nlop,ncolt=   3.11883903               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.500             662   3.11883903    
+  
+  EVENT           39 , RUN            1
+ #impact parameter,nlop,ncolt=   9.35739613               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852862.625             259   9.35739613    
+  
+  EVENT           40 , RUN            1
+ #impact parameter,nlop,ncolt=   5.31793737               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852722.438             381   5.31793737    
+  
+  EVENT           41 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0116072               0           0
+ #impact parameter,nlop,ncolt=   11.0995121               1           0
+ #impact parameter,nlop,ncolt=   11.1031647               2           0
+ #impact parameter,nlop,ncolt=   11.7142658               3           0
+ #impact parameter,nlop,ncolt=   3.70798922               4          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852618.250            1080   3.70798922    
+  
+  EVENT           42 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6949997               0           0
+ #impact parameter,nlop,ncolt=   6.40027237               1           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852710.312             603   6.40027237    
+  
+  EVENT           43 , RUN            1
+ #impact parameter,nlop,ncolt=   11.7630148               0           0
+ #impact parameter,nlop,ncolt=   4.43716812               1          12
+ satisfied:EATT(GeV),NATT,B(fm)=   853057.438            1036   4.43716812    
+  
+  EVENT           44 , RUN            1
+ #impact parameter,nlop,ncolt=   4.81084681               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852522.750             529   4.81084681    
+  
+  EVENT           45 , RUN            1
+ #impact parameter,nlop,ncolt=   4.42298603               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852724.312             503   4.42298603    
+  
+  EVENT           46 , RUN            1
+ #impact parameter,nlop,ncolt=   2.04437613               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852775.812             729   2.04437613    
+  
+  EVENT           47 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6915264               0           0
+ #impact parameter,nlop,ncolt=   1.47948933               1           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852631.188             688   1.47948933    
+  
+  EVENT           48 , RUN            1
+ #impact parameter,nlop,ncolt=   11.7117605               0           0
+ #impact parameter,nlop,ncolt=   8.63076973               1           0
+ #impact parameter,nlop,ncolt=   9.15547562               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.812             241   9.15547562    
+  
+  EVENT           49 , RUN            1
+ #impact parameter,nlop,ncolt=   7.67427397               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852715.000             235   7.67427397    
+  
+  EVENT           50 , RUN            1
+ #impact parameter,nlop,ncolt=   5.91824436               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852684.062             675   5.91824436    
+  
+  EVENT           51 , RUN            1
+ #impact parameter,nlop,ncolt=   10.8351393               0           0
+ #impact parameter,nlop,ncolt=   6.29464865               1           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852705.562             366   6.29464865    
+  
+  EVENT           52 , RUN            1
+ #impact parameter,nlop,ncolt=   7.67223787               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   851853.250             324   7.67223787    
+  
+  EVENT           53 , RUN            1
+ #impact parameter,nlop,ncolt=   10.1163359               0           0
+ #impact parameter,nlop,ncolt=   1.47154331               1          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852732.125             643   1.47154331    
+  
+  EVENT           54 , RUN            1
+ #impact parameter,nlop,ncolt=   9.30102253               0           0
+ #impact parameter,nlop,ncolt=   1.44800079               1           8
+ satisfied:EATT(GeV),NATT,B(fm)=   853104.188             739   1.44800079    
+  
+  EVENT           55 , RUN            1
+ #impact parameter,nlop,ncolt=   11.7380762               0           0
+ #impact parameter,nlop,ncolt=   4.29094696               1          18
+ satisfied:EATT(GeV),NATT,B(fm)=   852628.875             981   4.29094696    
+  
+  EVENT           56 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0952625               0           0
+ #impact parameter,nlop,ncolt=   10.3035994               1           0
+ #impact parameter,nlop,ncolt=   11.2933235               2           0
+ #impact parameter,nlop,ncolt=   1.99200654               3           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852645.312             529   1.99200654    
+  
+  EVENT           57 , RUN            1
+ #impact parameter,nlop,ncolt=   6.26318407               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852677.188             326   6.26318407    
+  
+  EVENT           58 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9029484               0           0
+ #impact parameter,nlop,ncolt=   9.13829041               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.750             265   9.13829041    
+  
+  EVENT           59 , RUN            1
+ #impact parameter,nlop,ncolt=   10.8729382               0           0
+ #impact parameter,nlop,ncolt=   10.3280907               1           0
+ #impact parameter,nlop,ncolt=   8.66813087               2           0
+ #impact parameter,nlop,ncolt=   4.69115353               3          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852843.500             743   4.69115353    
+  
+  EVENT           60 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6588106               0           0
+ #impact parameter,nlop,ncolt=   6.12514067               1           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852704.000             715   6.12514067    
+  
+  EVENT           61 , RUN            1
+ #impact parameter,nlop,ncolt=   8.50114536               0           0
+ #impact parameter,nlop,ncolt=   7.62942600               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.250             263   7.62942600    
+  
+  EVENT           62 , RUN            1
+ #impact parameter,nlop,ncolt=   4.62325478               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852705.625             581   4.62325478    
+  
+  EVENT           63 , RUN            1
+ #impact parameter,nlop,ncolt=   9.65184021               0           0
+ #impact parameter,nlop,ncolt=   4.12342644               1          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852709.625             872   4.12342644    
+  
+  EVENT           64 , RUN            1
+ #impact parameter,nlop,ncolt=   8.17779160               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852738.500             303   8.17779160    
+  
+  EVENT           65 , RUN            1
+ #impact parameter,nlop,ncolt=   6.27936935               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.000             235   6.27936935    
+  
+  EVENT           66 , RUN            1
+ #impact parameter,nlop,ncolt=   1.99323845               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852576.812             623   1.99323845    
+  
+  EVENT           67 , RUN            1
+ #impact parameter,nlop,ncolt=   7.80669117               0           0
+ #impact parameter,nlop,ncolt=   11.3798609               1           0
+ #impact parameter,nlop,ncolt=   9.90052509               2           0
+ #impact parameter,nlop,ncolt=   8.23840427               3           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852709.312             289   8.23840427    
+  
+  EVENT           68 , RUN            1
+ #impact parameter,nlop,ncolt=   9.27369213               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852724.000             256   9.27369213    
+  
+  EVENT           69 , RUN            1
+ #impact parameter,nlop,ncolt=   8.36316967               0           0
+ #impact parameter,nlop,ncolt=   10.9819002               1           0
+ #impact parameter,nlop,ncolt=   11.5443840               2           0
+ #impact parameter,nlop,ncolt=   4.76724148               3           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852658.938             354   4.76724148    
+  
+  EVENT           70 , RUN            1
+ #impact parameter,nlop,ncolt=   1.30971122               0          20
+ satisfied:EATT(GeV),NATT,B(fm)=   852752.875             726   1.30971122    
+  
+  EVENT           71 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3343048               0           0
+ #impact parameter,nlop,ncolt=   1.79225051               1           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852737.312             401   1.79225051    
+  
+  EVENT           72 , RUN            1
+ #impact parameter,nlop,ncolt=   4.49242163               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852575.875             814   4.49242163    
+  
+  EVENT           73 , RUN            1
+ #impact parameter,nlop,ncolt=   10.4120007               0           0
+ #impact parameter,nlop,ncolt=   8.72545910               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852710.375             318   8.72545910    
+  
+  EVENT           74 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2758350               0           0
+ #impact parameter,nlop,ncolt=   8.88211823               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.500             270   8.88211823    
+  
+  EVENT           75 , RUN            1
+ #impact parameter,nlop,ncolt=   11.5188475               0           0
+ #impact parameter,nlop,ncolt=   8.38262367               1           0
+ #impact parameter,nlop,ncolt=   9.38479805               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852706.062             262   9.38479805    
+  
+  EVENT           76 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2666016               0           0
+ #impact parameter,nlop,ncolt=   11.3373709               1           0
+ #impact parameter,nlop,ncolt=   11.6132736               2           0
+ #impact parameter,nlop,ncolt=   10.3294220               3           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852722.062             331   10.3294220    
+  
+  EVENT           77 , RUN            1
+ #impact parameter,nlop,ncolt=   10.3289633               0           0
+ #impact parameter,nlop,ncolt=   11.6562576               1           0
+ #impact parameter,nlop,ncolt=   11.5914106               2           0
+ #impact parameter,nlop,ncolt=   11.0307217               3           0
+ #impact parameter,nlop,ncolt=   3.45806885               4          16
+ satisfied:EATT(GeV),NATT,B(fm)=   853099.250             611   3.45806885    
+  
+  EVENT           78 , RUN            1
+ #impact parameter,nlop,ncolt=   10.3932533               0           0
+ #impact parameter,nlop,ncolt=   11.7023926               1           0
+ #impact parameter,nlop,ncolt=   7.02004957               2           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852659.625             411   7.02004957    
+  
+  EVENT           79 , RUN            1
+ #impact parameter,nlop,ncolt=   2.94119620               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.500            1029   2.94119620    
+  
+  EVENT           80 , RUN            1
+ #impact parameter,nlop,ncolt=   5.45306396               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852752.688             280   5.45306396    
+  
+  EVENT           81 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2973928               0           0
+ #impact parameter,nlop,ncolt=   6.30522919               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852777.250             244   6.30522919    
+  
+  EVENT           82 , RUN            1
+ #impact parameter,nlop,ncolt=   6.00194216               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.250             367   6.00194216    
+  
+  EVENT           83 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9098959               0           0
+ #impact parameter,nlop,ncolt=   6.73869371               1           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852708.625             571   6.73869371    
+  
+  EVENT           84 , RUN            1
+ #impact parameter,nlop,ncolt=   5.45538664               0          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852535.312             627   5.45538664    
+  
+  EVENT           85 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0760508               0           0
+ #impact parameter,nlop,ncolt=   10.7440023               1           0
+ #impact parameter,nlop,ncolt=   6.47998905               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852726.875             430   6.47998905    
+  
+  EVENT           86 , RUN            1
+ #impact parameter,nlop,ncolt=   11.8830767               0           0
+ #impact parameter,nlop,ncolt=   10.8578739               1           0
+ #impact parameter,nlop,ncolt=   10.1640291               2           0
+ #impact parameter,nlop,ncolt=   8.78708935               3           0
+ #impact parameter,nlop,ncolt=   9.68971825               4           0
+ #impact parameter,nlop,ncolt=   7.56934881               5           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852621.000             338   7.56934881    
+  
+  EVENT           87 , RUN            1
+ #impact parameter,nlop,ncolt=   1.93785930               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852781.375            1059   1.93785930    
+  
+  EVENT           88 , RUN            1
+ #impact parameter,nlop,ncolt=   11.7365713               0           0
+ #impact parameter,nlop,ncolt=   10.6990337               1           0
+ #impact parameter,nlop,ncolt=   9.39142704               2           0
+ #impact parameter,nlop,ncolt=   11.6734352               3           0
+ #impact parameter,nlop,ncolt=   10.2548418               4           0
+ #impact parameter,nlop,ncolt=   8.43635654               5           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852782.938             245   8.43635654    
+  
+  EVENT           89 , RUN            1
+ #impact parameter,nlop,ncolt=   11.1548977               0           0
+ #impact parameter,nlop,ncolt=   10.8547182               1           0
+ #impact parameter,nlop,ncolt=   6.66309357               2           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852677.812             479   6.66309357    
+  
+  EVENT           90 , RUN            1
+ #impact parameter,nlop,ncolt=   4.40901899               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852709.250             647   4.40901899    
+  
+  EVENT           91 , RUN            1
+ #impact parameter,nlop,ncolt=   9.46379948               0           0
+ #impact parameter,nlop,ncolt=   11.0096054               1           0
+ #impact parameter,nlop,ncolt=   4.62902117               2           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852823.125             718   4.62902117    
+  
+  EVENT           92 , RUN            1
+ #impact parameter,nlop,ncolt=   3.75016022               0          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852517.750             867   3.75016022    
+  
+  EVENT           93 , RUN            1
+ #impact parameter,nlop,ncolt=   2.03829622               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.062             534   2.03829622    
+  
+  EVENT           94 , RUN            1
+ #impact parameter,nlop,ncolt=   5.48378658               0          10
+ satisfied:EATT(GeV),NATT,B(fm)=   853047.312             650   5.48378658    
+  
+  EVENT           95 , RUN            1
+ #impact parameter,nlop,ncolt=   8.98400211               0           0
+ #impact parameter,nlop,ncolt=   8.29736519               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852731.562             301   8.29736519    
+  
+  EVENT           96 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6295900               0           0
+ #impact parameter,nlop,ncolt=   11.7019892               1           0
+ #impact parameter,nlop,ncolt=   8.53545666               2           0
+ #impact parameter,nlop,ncolt=   1.74251151               3          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852696.312             694   1.74251151    
+  
+  EVENT           97 , RUN            1
+ #impact parameter,nlop,ncolt=   7.16313076               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852744.875             436   7.16313076    
+  
+  EVENT           98 , RUN            1
+ #impact parameter,nlop,ncolt=   2.24136209               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852753.625             893   2.24136209    
+  
+  EVENT           99 , RUN            1
+ #impact parameter,nlop,ncolt=   10.7629576               0           0
+ #impact parameter,nlop,ncolt=   11.5641575               1           0
+ #impact parameter,nlop,ncolt=   6.04985237               2           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852605.250             685   6.04985237    
+  
+  EVENT          100 , RUN            1
+ #impact parameter,nlop,ncolt=   9.20316601               0           0
+ #impact parameter,nlop,ncolt=   11.2021065               1           0
+ #impact parameter,nlop,ncolt=   11.2692595               2           0
+ #impact parameter,nlop,ncolt=   4.84537363               3           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852723.438             580   4.84537363    
+  
+  EVENT          101 , RUN            1
+ #impact parameter,nlop,ncolt=   10.7610579               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.062             273   10.7610579    
+  
+  EVENT          102 , RUN            1
+ #impact parameter,nlop,ncolt=   4.10523558               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852687.500             818   4.10523558    
+  
+  EVENT          103 , RUN            1
+ #impact parameter,nlop,ncolt=   10.1157455               0           0
+ #impact parameter,nlop,ncolt=   3.48795748               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852673.562             806   3.48795748    
+  
+  EVENT          104 , RUN            1
+ #impact parameter,nlop,ncolt=   6.97340965               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852641.375             610   6.97340965    
+  
+  EVENT          105 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0145588               0           0
+ #impact parameter,nlop,ncolt=   10.4979610               1           0
+ #impact parameter,nlop,ncolt=   5.44509649               2           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852703.812             658   5.44509649    
+  
+  EVENT          106 , RUN            1
+ #impact parameter,nlop,ncolt=   8.96511173               0           0
+ #impact parameter,nlop,ncolt=   6.59170818               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.500             432   6.59170818    
+  
+  EVENT          107 , RUN            1
+ #impact parameter,nlop,ncolt=   5.37627602               0          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852713.750             670   5.37627602    
+  
+  EVENT          108 , RUN            1
+ #impact parameter,nlop,ncolt=   7.20549250               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852706.188             408   7.20549250    
+  
+  EVENT          109 , RUN            1
+ #impact parameter,nlop,ncolt=   9.13546085               0           0
+ #impact parameter,nlop,ncolt=   5.83993053               1           6
+ satisfied:EATT(GeV),NATT,B(fm)=   851195.625             531   5.83993053    
+  
+  EVENT          110 , RUN            1
+ #impact parameter,nlop,ncolt=   9.13000584               0           0
+ #impact parameter,nlop,ncolt=   7.03419876               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852860.438             321   7.03419876    
+  
+  EVENT          111 , RUN            1
+ #impact parameter,nlop,ncolt=   11.5020609               0           0
+ #impact parameter,nlop,ncolt=   9.20640945               1           0
+ #impact parameter,nlop,ncolt=   9.11268997               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.688             232   9.11268997    
+  
+  EVENT          112 , RUN            1
+ #impact parameter,nlop,ncolt=   8.49857616               0           0
+ #impact parameter,nlop,ncolt=   8.42106533               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.250             275   8.42106533    
+  
+  EVENT          113 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6931410               0           0
+ #impact parameter,nlop,ncolt=   6.70585680               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.312             266   6.70585680    
+  
+  EVENT          114 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2386150               0           0
+ #impact parameter,nlop,ncolt=   8.32179642               1           0
+ #impact parameter,nlop,ncolt=   4.32803583               2          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852775.250             889   4.32803583    
+  
+  EVENT          115 , RUN            1
+ #impact parameter,nlop,ncolt=   11.6215916               0           0
+ #impact parameter,nlop,ncolt=   11.4046402               1           0
+ #impact parameter,nlop,ncolt=   11.8512068               2           0
+ #impact parameter,nlop,ncolt=   10.9621677               3           0
+ #impact parameter,nlop,ncolt=   2.01681685               4           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852655.750             605   2.01681685    
+  
+  EVENT          116 , RUN            1
+ #impact parameter,nlop,ncolt=   4.82418394               0          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852575.375             790   4.82418394    
+  
+  EVENT          117 , RUN            1
+ #impact parameter,nlop,ncolt=   6.25507402               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852691.125             752   6.25507402    
+  
+  EVENT          118 , RUN            1
+ #impact parameter,nlop,ncolt=   6.19818306               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852664.750             470   6.19818306    
+  
+  EVENT          119 , RUN            1
+ #impact parameter,nlop,ncolt=   5.12374783               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852671.125             836   5.12374783    
+  
+  EVENT          120 , RUN            1
+ #impact parameter,nlop,ncolt=   7.95190811               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.500             366   7.95190811    
+  
+  EVENT          121 , RUN            1
+ #impact parameter,nlop,ncolt=   6.28506422               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852644.062             433   6.28506422    
+  
+  EVENT          122 , RUN            1
+ #impact parameter,nlop,ncolt=   6.68422461               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.250             287   6.68422461    
+  
+  EVENT          123 , RUN            1
+ #impact parameter,nlop,ncolt=   9.19851589               0           0
+ #impact parameter,nlop,ncolt=   7.65139914               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   853114.375             320   7.65139914    
+  
+  EVENT          124 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0699339               0           0
+ #impact parameter,nlop,ncolt=   10.1417875               1           0
+ #impact parameter,nlop,ncolt=   10.4750891               2           0
+ #impact parameter,nlop,ncolt=   11.4572296               3           0
+ #impact parameter,nlop,ncolt=  0.136159569               4           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852732.500             461  0.136159569    
+  
+  EVENT          125 , RUN            1
+ #impact parameter,nlop,ncolt=   4.50953817               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   853038.188             729   4.50953817    
+  
+  EVENT          126 , RUN            1
+ #impact parameter,nlop,ncolt=   6.60808945               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.875             270   6.60808945    
+  
+  EVENT          127 , RUN            1
+ #impact parameter,nlop,ncolt=   11.7095814               0           0
+ #impact parameter,nlop,ncolt=   5.73157406               1           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852712.375             659   5.73157406    
+  
+  EVENT          128 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3698921               0           0
+ #impact parameter,nlop,ncolt=   11.3702049               1           0
+ #impact parameter,nlop,ncolt=   9.42553616               2           0
+ #impact parameter,nlop,ncolt=   10.1692963               3           0
+ #impact parameter,nlop,ncolt=   11.6117430               4           0
+ #impact parameter,nlop,ncolt=   8.97100925               5           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.000             249   8.97100925    
+  
+  EVENT          129 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3742905               0           0
+ #impact parameter,nlop,ncolt=   8.96360302               1           0
+ #impact parameter,nlop,ncolt=   10.8650646               2           0
+ #impact parameter,nlop,ncolt=   7.51719904               3           0
+ #impact parameter,nlop,ncolt=   8.40325737               4           0
+ #impact parameter,nlop,ncolt=   11.0629873               5           0
+ #impact parameter,nlop,ncolt=   8.58340454               6           0
+ #impact parameter,nlop,ncolt=   4.68575287               7          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852723.500             903   4.68575287    
+  
+  EVENT          130 , RUN            1
+ #impact parameter,nlop,ncolt=   10.5450487               0           0
+ #impact parameter,nlop,ncolt=   4.15854263               1          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852694.625            1036   4.15854263    
+  
+  EVENT          131 , RUN            1
+ #impact parameter,nlop,ncolt=   10.7673712               0           0
+ #impact parameter,nlop,ncolt=   10.2746429               1           0
+ #impact parameter,nlop,ncolt=   10.2395945               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852663.438             265   10.2395945    
+  
+  EVENT          132 , RUN            1
+ #impact parameter,nlop,ncolt=   7.94207335               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.625             414   7.94207335    
+  
+  EVENT          133 , RUN            1
+ #impact parameter,nlop,ncolt=   5.46170425               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852381.375             743   5.46170425    
+  
+  EVENT          134 , RUN            1
+ #impact parameter,nlop,ncolt=   6.39680052               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.625             566   6.39680052    
+  
+  EVENT          135 , RUN            1
+ #impact parameter,nlop,ncolt=   7.72365427               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852931.500             638   7.72365427    
+  
+  EVENT          136 , RUN            1
+ #impact parameter,nlop,ncolt=   9.10481834               0           0
+ #impact parameter,nlop,ncolt=   3.20721436               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852687.062             968   3.20721436    
+  
+  EVENT          137 , RUN            1
+ #impact parameter,nlop,ncolt=   11.8638716               0           0
+ #impact parameter,nlop,ncolt=   10.3655691               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852725.625             275   10.3655691    
+  
+  EVENT          138 , RUN            1
+ #impact parameter,nlop,ncolt=   8.32097912               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852723.562             377   8.32097912    
+  
+  EVENT          139 , RUN            1
+ #impact parameter,nlop,ncolt=   7.87980080               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852713.375             255   7.87980080    
+  
+  EVENT          140 , RUN            1
+ #impact parameter,nlop,ncolt=   9.93647861               0           0
+ #impact parameter,nlop,ncolt=   5.90932417               1           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852722.000             529   5.90932417    
+  
+  EVENT          141 , RUN            1
+ #impact parameter,nlop,ncolt=   9.93979359               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.000             236   9.93979359    
+  
+  EVENT          142 , RUN            1
+ #impact parameter,nlop,ncolt=   4.10085106               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852779.562             803   4.10085106    
+  
+  EVENT          143 , RUN            1
+ #impact parameter,nlop,ncolt=   11.5517406               0           0
+ #impact parameter,nlop,ncolt=   7.13284492               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.188             245   7.13284492    
+  
+  EVENT          144 , RUN            1
+ #impact parameter,nlop,ncolt=   8.49414539               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.938             242   8.49414539    
+  
+  EVENT          145 , RUN            1
+ #impact parameter,nlop,ncolt=   11.6260910               0           0
+ #impact parameter,nlop,ncolt=   5.47112513               1          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852733.188            1045   5.47112513    
+  
+  EVENT          146 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0306635               0           0
+ #impact parameter,nlop,ncolt=   4.64696836               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852701.312             734   4.64696836    
+  
+  EVENT          147 , RUN            1
+ #impact parameter,nlop,ncolt=   11.2714243               0           0
+ #impact parameter,nlop,ncolt=   5.88085985               1          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852863.562             830   5.88085985    
+  
+  EVENT          148 , RUN            1
+ #impact parameter,nlop,ncolt=   8.98213863               0           0
+ #impact parameter,nlop,ncolt=   6.17701530               1           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852736.438             554   6.17701530    
+  
+  EVENT          149 , RUN            1
+ #impact parameter,nlop,ncolt=   6.45814228               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.500             438   6.45814228    
+  
+  EVENT          150 , RUN            1
+ #impact parameter,nlop,ncolt=   5.21604824               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.688             666   5.21604824    
+  
+  EVENT          151 , RUN            1
+ #impact parameter,nlop,ncolt=   8.89274979               0           0
+ #impact parameter,nlop,ncolt=   9.27634907               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852723.500             280   9.27634907    
+  
+  EVENT          152 , RUN            1
+ #impact parameter,nlop,ncolt=   4.59520340               0          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852504.875             638   4.59520340    
+  
+  EVENT          153 , RUN            1
+ #impact parameter,nlop,ncolt=   10.3910046               0           0
+ #impact parameter,nlop,ncolt=   8.77054882               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852710.625             332   8.77054882    
+  
+  EVENT          154 , RUN            1
+ #impact parameter,nlop,ncolt=   9.45792294               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.875             261   9.45792294    
+  
+  EVENT          155 , RUN            1
+ #impact parameter,nlop,ncolt=   9.37192917               0           0
+ #impact parameter,nlop,ncolt=   11.4883108               1           0
+ #impact parameter,nlop,ncolt=   7.28335381               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.375             269   7.28335381    
+  
+  EVENT          156 , RUN            1
+ #impact parameter,nlop,ncolt=   10.9879904               0           0
+ #impact parameter,nlop,ncolt=   6.53576708               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.125             512   6.53576708    
+  
+  EVENT          157 , RUN            1
+ #impact parameter,nlop,ncolt=   1.01316369               0          11
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|         887   3359.6550292968750        3359.6558303010534       -5.3821960743516684     
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|         888   3359.6550292968750        3359.6558303010534       -5.3821960743516684     
+ satisfied:EATT(GeV),NATT,B(fm)=   852858.312             610   1.01316369    
+  
+  EVENT          158 , RUN            1
+ #impact parameter,nlop,ncolt=   9.72983551               0           0
+ #impact parameter,nlop,ncolt=   9.76387405               1           0
+ #impact parameter,nlop,ncolt=   3.71143651               2           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.250             583   3.71143651    
+  
+  EVENT          159 , RUN            1
+ #impact parameter,nlop,ncolt=   10.7354593               0           0
+ #impact parameter,nlop,ncolt=   11.8326082               1           0
+ #impact parameter,nlop,ncolt=   5.27015209               2           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852687.625             574   5.27015209    
+  
+  EVENT          160 , RUN            1
+ #impact parameter,nlop,ncolt=   10.9162312               0           0
+ #impact parameter,nlop,ncolt=   9.73900604               1           0
+ #impact parameter,nlop,ncolt=   8.76845837               2           0
+ #impact parameter,nlop,ncolt=   8.73137188               3           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.062             243   8.73137188    
+  
+  EVENT          161 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3797541               0           0
+ #impact parameter,nlop,ncolt=   11.9835892               1           0
+ #impact parameter,nlop,ncolt=   2.32850266               2           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852724.000             692   2.32850266    
+  
+  EVENT          162 , RUN            1
+ #impact parameter,nlop,ncolt=   6.21640205               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.312             554   6.21640205    
+  
+  EVENT          163 , RUN            1
+ #impact parameter,nlop,ncolt=   8.53986359               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.750             246   8.53986359    
+  
+  EVENT          164 , RUN            1
+ #impact parameter,nlop,ncolt=   7.59073591               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.625             350   7.59073591    
+  
+  EVENT          165 , RUN            1
+ #impact parameter,nlop,ncolt=   10.8708458               0           0
+ #impact parameter,nlop,ncolt=   5.31587744               1           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852816.312             588   5.31587744    
+  
+  EVENT          166 , RUN            1
+ #impact parameter,nlop,ncolt=   6.56910133               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852708.000             427   6.56910133    
+  
+  EVENT          167 , RUN            1
+ #impact parameter,nlop,ncolt=   10.8031673               0           0
+ #impact parameter,nlop,ncolt=   11.7761002               1           0
+ #impact parameter,nlop,ncolt=   11.0633392               2           0
+ #impact parameter,nlop,ncolt=   10.3496008               3           0
+ #impact parameter,nlop,ncolt=   10.5084181               4           0
+ #impact parameter,nlop,ncolt=   7.70630121               5           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.625             269   7.70630121    
+  
+  EVENT          168 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2909241               0           0
+ #impact parameter,nlop,ncolt=   11.8485832               1           0
+ #impact parameter,nlop,ncolt=   9.72277641               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852277.812             281   9.72277641    
+  
+  EVENT          169 , RUN            1
+ #impact parameter,nlop,ncolt=   7.91406584               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.375             343   7.91406584    
+  
+  EVENT          170 , RUN            1
+ #impact parameter,nlop,ncolt=   8.04566669               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.875             356   8.04566669    
+  
+  EVENT          171 , RUN            1
+ #impact parameter,nlop,ncolt=   6.64584589               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852617.000             578   6.64584589    
+  
+  EVENT          172 , RUN            1
+ #impact parameter,nlop,ncolt=   7.84466791               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.250             352   7.84466791    
+  
+  EVENT          173 , RUN            1
+ #impact parameter,nlop,ncolt=   2.77722025               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852652.375             576   2.77722025    
+  
+  EVENT          174 , RUN            1
+ #impact parameter,nlop,ncolt=   9.56594086               0           0
+ #impact parameter,nlop,ncolt=   11.1082411               1           0
+ #impact parameter,nlop,ncolt=   5.93811464               2           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852732.562             453   5.93811464    
+  
+  EVENT          175 , RUN            1
+ #impact parameter,nlop,ncolt=   5.04113340               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852742.375             671   5.04113340    
+  
+  EVENT          176 , RUN            1
+ #impact parameter,nlop,ncolt=   7.28624535               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852780.375             316   7.28624535    
+  
+  EVENT          177 , RUN            1
+ #impact parameter,nlop,ncolt=   5.62489605               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852695.000             701   5.62489605    
+  
+  EVENT          178 , RUN            1
+ #impact parameter,nlop,ncolt=   9.86248779               0           0
+ #impact parameter,nlop,ncolt=   11.8723793               1           0
+ #impact parameter,nlop,ncolt=   6.10862255               2           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852667.312             453   6.10862255    
+  
+  EVENT          179 , RUN            1
+ #impact parameter,nlop,ncolt=   10.7810154               0           0
+ #impact parameter,nlop,ncolt=   11.9521494               1           0
+ #impact parameter,nlop,ncolt=   8.24114990               2           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852856.062             364   8.24114990    
+  
+  EVENT          180 , RUN            1
+ #impact parameter,nlop,ncolt=   6.70336056               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.625             262   6.70336056    
+  
+  EVENT          181 , RUN            1
+ #impact parameter,nlop,ncolt=   5.53211880               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852696.375             599   5.53211880    
+  
+  EVENT          182 , RUN            1
+ #impact parameter,nlop,ncolt=   6.36522579               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852733.812             709   6.36522579    
+  
+  EVENT          183 , RUN            1
+ #impact parameter,nlop,ncolt=   8.88310814               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852724.750             243   8.88310814    
+  
+  EVENT          184 , RUN            1
+ #impact parameter,nlop,ncolt=   7.15678930               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852657.750             365   7.15678930    
+  
+  EVENT          185 , RUN            1
+ #impact parameter,nlop,ncolt=   11.4406376               0           0
+ #impact parameter,nlop,ncolt=   10.5790901               1           0
+ #impact parameter,nlop,ncolt=   9.03794289               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852660.062             245   9.03794289    
+  
+  EVENT          186 , RUN            1
+ #impact parameter,nlop,ncolt=   7.12833834               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852711.812             544   7.12833834    
+  
+  EVENT          187 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0926552               0           0
+ #impact parameter,nlop,ncolt=   6.66546869               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852715.812             764   6.66546869    
+  
+  EVENT          188 , RUN            1
+ #impact parameter,nlop,ncolt=   10.3144255               0           0
+ #impact parameter,nlop,ncolt=   1.60840642               1           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852786.188             658   1.60840642    
+  
+  EVENT          189 , RUN            1
+ #impact parameter,nlop,ncolt=   10.7474833               0           0
+ #impact parameter,nlop,ncolt=   8.69916153               1           0
+ #impact parameter,nlop,ncolt=   6.06120825               2           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852710.500             607   6.06120825    
+  
+  EVENT          190 , RUN            1
+ #impact parameter,nlop,ncolt=   9.78874302               0           0
+ #impact parameter,nlop,ncolt=   9.06860924               1           0
+ #impact parameter,nlop,ncolt=   7.84702444               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.000             258   7.84702444    
+  
+  EVENT          191 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9850235               0           0
+ #impact parameter,nlop,ncolt=   10.6523037               1           0
+ #impact parameter,nlop,ncolt=   5.04360151               2          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852699.750             598   5.04360151    
+  
+  EVENT          192 , RUN            1
+ #impact parameter,nlop,ncolt=   8.21810913               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852701.375             276   8.21810913    
+  
+  EVENT          193 , RUN            1
+ #impact parameter,nlop,ncolt=   11.8621702               0           0
+ #impact parameter,nlop,ncolt=   9.51762486               1           0
+ #impact parameter,nlop,ncolt=   9.25398636               2           0
+ #impact parameter,nlop,ncolt=   10.4686327               3           0
+ #impact parameter,nlop,ncolt=   6.90582943               4           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852712.125             258   6.90582943    
+  
+  EVENT          194 , RUN            1
+ #impact parameter,nlop,ncolt=   8.39797878               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852747.438             497   8.39797878    
+  
+  EVENT          195 , RUN            1
+ #impact parameter,nlop,ncolt=   4.53703690               0          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852725.500             722   4.53703690    
+  
+  EVENT          196 , RUN            1
+ #impact parameter,nlop,ncolt=   3.73278522               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   853178.875             549   3.73278522    
+  
+  EVENT          197 , RUN            1
+ #impact parameter,nlop,ncolt=   2.71017480               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852782.000             449   2.71017480    
+  
+  EVENT          198 , RUN            1
+ #impact parameter,nlop,ncolt=   11.1705599               0           0
+ #impact parameter,nlop,ncolt=   11.3358297               1           0
+ #impact parameter,nlop,ncolt=   11.8145895               2           0
+ #impact parameter,nlop,ncolt=   4.12204027               3           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852712.500             576   4.12204027    
+  
+  EVENT          199 , RUN            1
+ #impact parameter,nlop,ncolt=   4.77290964               0          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852619.500             893   4.77290964    
+  
+  EVENT          200 , RUN            1
+ #impact parameter,nlop,ncolt=   2.55832005               0          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852543.812             799   2.55832005    
+  
+  EVENT          201 , RUN            1
+ #impact parameter,nlop,ncolt=   5.73568153               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.750             459   5.73568153    
+  
+  EVENT          202 , RUN            1
+ #impact parameter,nlop,ncolt=   8.99680424               0           0
+ #impact parameter,nlop,ncolt=   9.57213116               1           0
+ #impact parameter,nlop,ncolt=   7.93530703               2           0
+ #impact parameter,nlop,ncolt=   6.60503340               3           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852675.125             401   6.60503340    
+  
+  EVENT          203 , RUN            1
+ #impact parameter,nlop,ncolt=   4.38882446               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.312             804   4.38882446    
+  
+  EVENT          204 , RUN            1
+ #impact parameter,nlop,ncolt=   5.05221891               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852712.125             427   5.05221891    
+  
+  EVENT          205 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9514217               0           0
+ #impact parameter,nlop,ncolt=   6.92883921               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852722.750             303   6.92883921    
+  
+  EVENT          206 , RUN            1
+ #impact parameter,nlop,ncolt=   3.37933588               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852891.000             498   3.37933588    
+  
+  EVENT          207 , RUN            1
+ #impact parameter,nlop,ncolt=   8.26697826               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.500             327   8.26697826    
+  
+  EVENT          208 , RUN            1
+ #impact parameter,nlop,ncolt=   2.26864529               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852653.625             677   2.26864529    
+  
+  EVENT          209 , RUN            1
+ #impact parameter,nlop,ncolt=   10.3589296               0           0
+ #impact parameter,nlop,ncolt=   7.57062531               1           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852710.500             326   7.57062531    
+  
+  EVENT          210 , RUN            1
+ #impact parameter,nlop,ncolt=   10.4469252               0           0
+ #impact parameter,nlop,ncolt=   9.94835281               1           0
+ #impact parameter,nlop,ncolt=   8.02225494               2           0
+ #impact parameter,nlop,ncolt=   8.76348019               3           0
+ #impact parameter,nlop,ncolt=   2.20585823               4          20
+ satisfied:EATT(GeV),NATT,B(fm)=   852733.375            1106   2.20585823    
+  
+  EVENT          211 , RUN            1
+ #impact parameter,nlop,ncolt=   1.44285846               0          20
+ satisfied:EATT(GeV),NATT,B(fm)=   853083.938             841   1.44285846    
+  
+  EVENT          212 , RUN            1
+ #impact parameter,nlop,ncolt=   11.4135666               0           0
+ #impact parameter,nlop,ncolt=   10.6096973               1           0
+ #impact parameter,nlop,ncolt=   5.10843754               2          14
+ satisfied:EATT(GeV),NATT,B(fm)=   852712.812             809   5.10843754    
+  
+  EVENT          213 , RUN            1
+ #impact parameter,nlop,ncolt=   5.63512897               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852673.812             652   5.63512897    
+  
+  EVENT          214 , RUN            1
+ #impact parameter,nlop,ncolt=   10.1101780               0           0
+ #impact parameter,nlop,ncolt=   6.45485878               1           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852636.812             513   6.45485878    
+  
+  EVENT          215 , RUN            1
+ #impact parameter,nlop,ncolt=   9.62282085               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852734.938             251   9.62282085    
+  
+  EVENT          216 , RUN            1
+ #impact parameter,nlop,ncolt=   6.11454058               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852589.125             586   6.11454058    
+  
+  EVENT          217 , RUN            1
+ #impact parameter,nlop,ncolt=   7.29220819               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852698.938             321   7.29220819    
+  
+  EVENT          218 , RUN            1
+ #impact parameter,nlop,ncolt=   9.17473888               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.750             257   9.17473888    
+  
+  EVENT          219 , RUN            1
+ #impact parameter,nlop,ncolt=   8.42228413               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852706.500             336   8.42228413    
+  
+  EVENT          220 , RUN            1
+ #impact parameter,nlop,ncolt=   1.51877666               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852532.062             504   1.51877666    
+  
+  EVENT          221 , RUN            1
+ #impact parameter,nlop,ncolt=   10.1413355               0           0
+ #impact parameter,nlop,ncolt=   7.70135212               1           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.500             335   7.70135212    
+  
+  EVENT          222 , RUN            1
+ #impact parameter,nlop,ncolt=   9.58530140               0           0
+ #impact parameter,nlop,ncolt=   10.9230537               1           0
+ #impact parameter,nlop,ncolt=   6.86743736               2           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852693.500             568   6.86743736    
+  
+  EVENT          223 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0293961               0           0
+ #impact parameter,nlop,ncolt=   11.2204170               1           0
+ #impact parameter,nlop,ncolt=   11.7588816               2           0
+ #impact parameter,nlop,ncolt=   7.87407112               3           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.688             239   7.87407112    
+  
+  EVENT          224 , RUN            1
+ #impact parameter,nlop,ncolt=   3.36591887               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.062             384   3.36591887    
+  
+  EVENT          225 , RUN            1
+ #impact parameter,nlop,ncolt=   9.93261528               0           0
+ #impact parameter,nlop,ncolt=   9.54882717               1           0
+ #impact parameter,nlop,ncolt=   8.52543545               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.062             249   8.52543545    
+  
+  EVENT          226 , RUN            1
+ #impact parameter,nlop,ncolt=   10.7750912               0           0
+ #impact parameter,nlop,ncolt=   11.1879034               1           0
+ #impact parameter,nlop,ncolt=   8.24038315               2           0
+ #impact parameter,nlop,ncolt=   8.20292377               3           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852723.000             289   8.20292377    
+  
+  EVENT          227 , RUN            1
+ #impact parameter,nlop,ncolt=   9.65692425               0           0
+ #impact parameter,nlop,ncolt=   11.0234585               1           0
+ #impact parameter,nlop,ncolt=   8.39420891               2           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.188             353   8.39420891    
+  
+  EVENT          228 , RUN            1
+ #impact parameter,nlop,ncolt=   11.8539429               0           0
+ #impact parameter,nlop,ncolt=   6.62426376               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852591.000             524   6.62426376    
+  
+  EVENT          229 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0166302               0           0
+ #impact parameter,nlop,ncolt=   8.16502571               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.062             249   8.16502571    
+  
+  EVENT          230 , RUN            1
+ #impact parameter,nlop,ncolt=   3.50756884               0          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852667.875             755   3.50756884    
+  
+  EVENT          231 , RUN            1
+ #impact parameter,nlop,ncolt=   10.1335154               0           0
+ #impact parameter,nlop,ncolt=   6.57119179               1           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.125             254   6.57119179    
+  
+  EVENT          232 , RUN            1
+ #impact parameter,nlop,ncolt=   9.21691227               0           0
+ #impact parameter,nlop,ncolt=   8.70006371               1           0
+ #impact parameter,nlop,ncolt=   8.35904312               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.938             325   8.35904312    
+  
+  EVENT          233 , RUN            1
+ #impact parameter,nlop,ncolt=   9.17514896               0           0
+ #impact parameter,nlop,ncolt=   9.47745323               1           0
+ #impact parameter,nlop,ncolt=   10.7261972               2           0
+ #impact parameter,nlop,ncolt=   10.8278131               3           0
+ #impact parameter,nlop,ncolt=   4.92337465               4           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852532.188             570   4.92337465    
+  
+  EVENT          234 , RUN            1
+ #impact parameter,nlop,ncolt=   4.77564955               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852687.750             488   4.77564955    
+  
+  EVENT          235 , RUN            1
+ #impact parameter,nlop,ncolt=   9.65190792               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852693.375             240   9.65190792    
+  
+  EVENT          236 , RUN            1
+ #impact parameter,nlop,ncolt=   6.84295464               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852712.875             290   6.84295464    
+  
+  EVENT          237 , RUN            1
+ #impact parameter,nlop,ncolt=   4.45147848               0          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852744.875             937   4.45147848    
+  
+  EVENT          238 , RUN            1
+ #impact parameter,nlop,ncolt=   9.64947224               0           0
+ #impact parameter,nlop,ncolt=   10.9074087               1           0
+ #impact parameter,nlop,ncolt=   6.62465239               2           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852806.500             450   6.62465239    
+  
+  EVENT          239 , RUN            1
+ #impact parameter,nlop,ncolt=   10.3245726               0           0
+ #impact parameter,nlop,ncolt=   11.7933426               1           0
+ #impact parameter,nlop,ncolt=   11.5700846               2           0
+ #impact parameter,nlop,ncolt=   11.4423676               3           0
+ #impact parameter,nlop,ncolt=   7.34617710               4           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.875             504   7.34617710    
+  
+  EVENT          240 , RUN            1
+ #impact parameter,nlop,ncolt=   8.50747490               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.875             281   8.50747490    
+  
+  EVENT          241 , RUN            1
+ #impact parameter,nlop,ncolt=   2.87759161               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852736.312             635   2.87759161    
+  
+  EVENT          242 , RUN            1
+ #impact parameter,nlop,ncolt=   9.41702747               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.562             303   9.41702747    
+  
+  EVENT          243 , RUN            1
+ #impact parameter,nlop,ncolt=   10.8526621               0           0
+ #impact parameter,nlop,ncolt=   11.1364431               1           0
+ #impact parameter,nlop,ncolt=   11.0048218               2           0
+ #impact parameter,nlop,ncolt=   8.26429081               3           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852706.625             302   8.26429081    
+  
+  EVENT          244 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0233488               0           0
+ #impact parameter,nlop,ncolt=   11.2302380               1           0
+ #impact parameter,nlop,ncolt=   11.0961637               2           0
+ #impact parameter,nlop,ncolt=   5.98632288               3           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852532.562             502   5.98632288    
+  
+  EVENT          245 , RUN            1
+ #impact parameter,nlop,ncolt=   10.4599037               0           0
+ #impact parameter,nlop,ncolt=   9.24729633               1           0
+ #impact parameter,nlop,ncolt=   6.69398165               2           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.750             426   6.69398165    
+  
+  EVENT          246 , RUN            1
+ #impact parameter,nlop,ncolt=   8.05460835               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852741.188             230   8.05460835    
+  
+  EVENT          247 , RUN            1
+ #impact parameter,nlop,ncolt=   9.69509697               0           0
+ #impact parameter,nlop,ncolt=   10.3093901               1           0
+ #impact parameter,nlop,ncolt=   9.92634964               2           0
+ #impact parameter,nlop,ncolt=   6.12195063               3           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852669.125             511   6.12195063    
+  
+  EVENT          248 , RUN            1
+ #impact parameter,nlop,ncolt=   6.68696642               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852681.438             337   6.68696642    
+  
+  EVENT          249 , RUN            1
+ #impact parameter,nlop,ncolt=   5.23573112               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852713.750             330   5.23573112    
+  
+  EVENT          250 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2495661               0           0
+ #impact parameter,nlop,ncolt=   6.16886473               1           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852690.000             437   6.16886473    
+  
+  EVENT          251 , RUN            1
+ #impact parameter,nlop,ncolt=   5.69570732               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852705.875             392   5.69570732    
+  
+  EVENT          252 , RUN            1
+ #impact parameter,nlop,ncolt=   9.70743561               0           0
+ #impact parameter,nlop,ncolt=   10.8841038               1           0
+ #impact parameter,nlop,ncolt=   8.07920074               2           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852726.500             414   8.07920074    
+  
+  EVENT          253 , RUN            1
+ #impact parameter,nlop,ncolt=   5.86728287               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852771.688             499   5.86728287    
+  
+  EVENT          254 , RUN            1
+ #impact parameter,nlop,ncolt=   5.33477020               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852715.938             506   5.33477020    
+  
+  EVENT          255 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2313948               0           0
+ #impact parameter,nlop,ncolt=   11.3498783               1           0
+ #impact parameter,nlop,ncolt=   6.90230894               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.438             248   6.90230894    
+  
+  EVENT          256 , RUN            1
+ #impact parameter,nlop,ncolt=   4.21156216               0          15
+ satisfied:EATT(GeV),NATT,B(fm)=   852859.375            1047   4.21156216    
+  
+  EVENT          257 , RUN            1
+ #impact parameter,nlop,ncolt=   10.3841782               0           0
+ #impact parameter,nlop,ncolt=   2.75657916               1          15
+ satisfied:EATT(GeV),NATT,B(fm)=   852925.938             894   2.75657916    
+  
+  EVENT          258 , RUN            1
+ #impact parameter,nlop,ncolt=   8.32616806               0           0
+ #impact parameter,nlop,ncolt=   6.51109982               1           7
+ satisfied:EATT(GeV),NATT,B(fm)=   853102.750             608   6.51109982    
+  
+  EVENT          259 , RUN            1
+ #impact parameter,nlop,ncolt=   6.32606554               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852733.000             503   6.32606554    
+  
+  EVENT          260 , RUN            1
+ #impact parameter,nlop,ncolt=   6.55507755               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.750             480   6.55507755    
+  
+  EVENT          261 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2434063               0           0
+ #impact parameter,nlop,ncolt=   3.88734531               1           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.938             466   3.88734531    
+  
+  EVENT          262 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3455439               0           0
+ #impact parameter,nlop,ncolt=   11.3442574               1           0
+ #impact parameter,nlop,ncolt=   11.5866404               2           0
+ #impact parameter,nlop,ncolt=   11.8633833               3           0
+ #impact parameter,nlop,ncolt=   8.13651371               4           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.250             234   8.13651371    
+  
+  EVENT          263 , RUN            1
+ #impact parameter,nlop,ncolt=   7.41574907               0           0
+ #impact parameter,nlop,ncolt=   1.85934317               1          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852930.438             828   1.85934317    
+  
+  EVENT          264 , RUN            1
+ #impact parameter,nlop,ncolt=   6.36432266               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852819.375             387   6.36432266    
+  
+  EVENT          265 , RUN            1
+ #impact parameter,nlop,ncolt=   11.4953890               0           0
+ #impact parameter,nlop,ncolt=   11.8578138               1           0
+ #impact parameter,nlop,ncolt=   6.37561655               2           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852754.250             376   6.37561655    
+  
+  EVENT          266 , RUN            1
+ #impact parameter,nlop,ncolt=   4.43539190               0          17
+ satisfied:EATT(GeV),NATT,B(fm)=   852834.625             821   4.43539190    
+  
+  EVENT          267 , RUN            1
+ #impact parameter,nlop,ncolt=   9.02096558               0           0
+ #impact parameter,nlop,ncolt=   11.6187477               1           0
+ #impact parameter,nlop,ncolt=   11.6427794               2           0
+ #impact parameter,nlop,ncolt=   4.70605564               3           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852781.250             599   4.70605564    
+  
+  EVENT          268 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9990273               0           0
+ #impact parameter,nlop,ncolt=   9.89421177               1           0
+ #impact parameter,nlop,ncolt=   10.2585945               2           0
+ #impact parameter,nlop,ncolt=   4.83069468               3           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852711.062             701   4.83069468    
+  
+  EVENT          269 , RUN            1
+ #impact parameter,nlop,ncolt=  0.292499632               0          15
+ satisfied:EATT(GeV),NATT,B(fm)=   852488.312             791  0.292499632    
+  
+  EVENT          270 , RUN            1
+ #impact parameter,nlop,ncolt=   8.69356346               0           0
+ #impact parameter,nlop,ncolt=   6.53203630               1           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852684.750             361   6.53203630    
+  
+  EVENT          271 , RUN            1
+ #impact parameter,nlop,ncolt=   5.70936775               0          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852851.250             696   5.70936775    
+  
+  EVENT          272 , RUN            1
+ #impact parameter,nlop,ncolt=   3.87061286               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852658.125             501   3.87061286    
+  
+  EVENT          273 , RUN            1
+ #impact parameter,nlop,ncolt=   3.85417724               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852701.312             613   3.85417724    
+  
+  EVENT          274 , RUN            1
+ #impact parameter,nlop,ncolt=   11.5755272               0           0
+ #impact parameter,nlop,ncolt=   3.77006507               1           9
+ satisfied:EATT(GeV),NATT,B(fm)=   853141.438             696   3.77006507    
+  
+  EVENT          275 , RUN            1
+ #impact parameter,nlop,ncolt=   10.4031181               0           0
+ #impact parameter,nlop,ncolt=   10.0759630               1           0
+ #impact parameter,nlop,ncolt=   10.6966934               2           0
+ #impact parameter,nlop,ncolt=   11.2617159               3           0
+ #impact parameter,nlop,ncolt=   11.4688320               4           0
+ #impact parameter,nlop,ncolt=   8.15048122               5           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852713.625             265   8.15048122    
+  
+  EVENT          276 , RUN            1
+ #impact parameter,nlop,ncolt=   8.92743587               0           0
+ #impact parameter,nlop,ncolt=   9.43196487               1           0
+ #impact parameter,nlop,ncolt=   9.09225082               2           0
+ #impact parameter,nlop,ncolt=   10.9455624               3           0
+ #impact parameter,nlop,ncolt=   7.77745438               4           0
+ #impact parameter,nlop,ncolt=   10.0843029               5           0
+ #impact parameter,nlop,ncolt=   9.63808632               6           0
+ #impact parameter,nlop,ncolt=   9.38590145               7           0
+ #impact parameter,nlop,ncolt=   11.2238998               8           0
+ #impact parameter,nlop,ncolt=   6.98291254               9           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852728.000             260   6.98291254    
+  
+  EVENT          277 , RUN            1
+ #impact parameter,nlop,ncolt=   9.02953053               0           0
+ #impact parameter,nlop,ncolt=   3.02998257               1          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852511.688             608   3.02998257    
+  
+  EVENT          278 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2340117               0           0
+ #impact parameter,nlop,ncolt=   11.0750189               1           0
+ #impact parameter,nlop,ncolt=   8.07454395               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.875             242   8.07454395    
+  
+  EVENT          279 , RUN            1
+ #impact parameter,nlop,ncolt=   9.90730572               0           0
+ #impact parameter,nlop,ncolt=   3.34439445               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852686.500             672   3.34439445    
+  
+  EVENT          280 , RUN            1
+ #impact parameter,nlop,ncolt=   3.12706780               0          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852734.438             620   3.12706780    
+  
+  EVENT          281 , RUN            1
+ #impact parameter,nlop,ncolt=   5.79837799               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852706.688             450   5.79837799    
+  
+  EVENT          282 , RUN            1
+ #impact parameter,nlop,ncolt=   8.93675518               0           0
+ #impact parameter,nlop,ncolt=   10.3978481               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852715.875             291   10.3978481    
+  
+  EVENT          283 , RUN            1
+ #impact parameter,nlop,ncolt=   5.71405029               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852728.750             395   5.71405029    
+  
+  EVENT          284 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9719639               0           0
+ #impact parameter,nlop,ncolt=   11.8648405               1           0
+ #impact parameter,nlop,ncolt=   11.7852154               2           0
+ #impact parameter,nlop,ncolt=   5.55503988               3           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.125             457   5.55503988    
+  
+  EVENT          285 , RUN            1
+ #impact parameter,nlop,ncolt=   8.53699875               0           0
+ #impact parameter,nlop,ncolt=   5.10269833               1           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852936.500             653   5.10269833    
+  
+  EVENT          286 , RUN            1
+ #impact parameter,nlop,ncolt=   5.48752308               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852663.562             598   5.48752308    
+  
+  EVENT          287 , RUN            1
+ #impact parameter,nlop,ncolt=   10.9381351               0           0
+ #impact parameter,nlop,ncolt=   11.0735645               1           0
+ #impact parameter,nlop,ncolt=   4.47731781               2           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852702.938             674   4.47731781    
+  
+  EVENT          288 , RUN            1
+ #impact parameter,nlop,ncolt=   5.91620493               0           5
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|         521   448.32363891601562        448.32379924904308      -0.14376219830592163     
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|         522   448.32363891601562        448.32379924904308      -0.14376219830592163     
+ satisfied:EATT(GeV),NATT,B(fm)=   852715.938             455   5.91620493    
+  
+  EVENT          289 , RUN            1
+ #impact parameter,nlop,ncolt=   10.1745090               0           0
+ #impact parameter,nlop,ncolt=   7.38815832               1           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.500             476   7.38815832    
+  
+  EVENT          290 , RUN            1
+ #impact parameter,nlop,ncolt=   1.47502708               0          18
+ satisfied:EATT(GeV),NATT,B(fm)=   852625.000             860   1.47502708    
+  
+  EVENT          291 , RUN            1
+ #impact parameter,nlop,ncolt=   11.7503529               0           0
+ #impact parameter,nlop,ncolt=   7.22218561               1           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852754.625             448   7.22218561    
+  
+  EVENT          292 , RUN            1
+ #impact parameter,nlop,ncolt=   7.73040104               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.375             313   7.73040104    
+  
+  EVENT          293 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0788965               0           0
+ #impact parameter,nlop,ncolt=   5.46698236               1           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852693.312             712   5.46698236    
+  
+  EVENT          294 , RUN            1
+ #impact parameter,nlop,ncolt=   6.69139862               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852632.312             433   6.69139862    
+  
+  EVENT          295 , RUN            1
+ #impact parameter,nlop,ncolt=   8.35273170               0           0
+ #impact parameter,nlop,ncolt=   4.39409781               1           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852732.000             500   4.39409781    
+  
+  EVENT          296 , RUN            1
+ #impact parameter,nlop,ncolt=   11.2852383               0           0
+ #impact parameter,nlop,ncolt=   9.29115105               1           0
+ #impact parameter,nlop,ncolt=   11.1893167               2           0
+ #impact parameter,nlop,ncolt=   11.0118532               3           0
+ #impact parameter,nlop,ncolt=   7.45575476               4           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852766.625             621   7.45575476    
+  
+  EVENT          297 , RUN            1
+ #impact parameter,nlop,ncolt=   11.1454029               0           0
+ #impact parameter,nlop,ncolt=   10.5531378               1           0
+ #impact parameter,nlop,ncolt=   11.6973181               2           0
+ #impact parameter,nlop,ncolt=   8.63413429               3           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.250             289   8.63413429    
+  
+  EVENT          298 , RUN            1
+ #impact parameter,nlop,ncolt=   8.93052769               0           0
+ #impact parameter,nlop,ncolt=   8.08361244               1           0
+ #impact parameter,nlop,ncolt=   11.8686466               2           0
+ #impact parameter,nlop,ncolt=   1.29719996               3          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852837.188             635   1.29719996    
+  
+  EVENT          299 , RUN            1
+ #impact parameter,nlop,ncolt=   9.13477707               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.000             303   9.13477707    
+  
+  EVENT          300 , RUN            1
+ #impact parameter,nlop,ncolt=   6.37666941               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852724.688             678   6.37666941    
+  
+  EVENT          301 , RUN            1
+ #impact parameter,nlop,ncolt=   5.19606638               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852678.375             585   5.19606638    
+  
+  EVENT          302 , RUN            1
+ #impact parameter,nlop,ncolt=   4.52844048               0          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852867.500             626   4.52844048    
+  
+  EVENT          303 , RUN            1
+ #impact parameter,nlop,ncolt=   9.01554298               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852687.438             266   9.01554298    
+  
+  EVENT          304 , RUN            1
+ #impact parameter,nlop,ncolt=   8.53224373               0           0
+ #impact parameter,nlop,ncolt=   10.1419277               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.000             223   10.1419277    
+  
+  EVENT          305 , RUN            1
+ #impact parameter,nlop,ncolt=   8.36084557               0           0
+ #impact parameter,nlop,ncolt=   8.17540359               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852713.812             292   8.17540359    
+  
+  EVENT          306 , RUN            1
+ #impact parameter,nlop,ncolt=   11.4026718               0           0
+ #impact parameter,nlop,ncolt=   9.43019009               1           0
+ #impact parameter,nlop,ncolt=   10.5307703               2           0
+ #impact parameter,nlop,ncolt=   2.02187490               3          15
+ satisfied:EATT(GeV),NATT,B(fm)=   852224.062             765   2.02187490    
+  
+  EVENT          307 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9254751               0           0
+ #impact parameter,nlop,ncolt=   4.48195457               1           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852733.312             738   4.48195457    
+  
+  EVENT          308 , RUN            1
+ #impact parameter,nlop,ncolt=   6.42602491               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852691.188             736   6.42602491    
+  
+  EVENT          309 , RUN            1
+ #impact parameter,nlop,ncolt=   9.29777431               0           0
+ #impact parameter,nlop,ncolt=   10.7259932               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.188             255   10.7259932    
+  
+  EVENT          310 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3525887               0           0
+ #impact parameter,nlop,ncolt=   4.26838493               1          13
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|         903   3683.1450195312500       -3683.1454585963511       -3.2342810742557049     
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|         904   3683.1450195312500       -3683.1454585963511       -3.2342810742557049     
+ satisfied:EATT(GeV),NATT,B(fm)=   852391.375             626   4.26838493    
+  
+  EVENT          311 , RUN            1
+ #impact parameter,nlop,ncolt=   7.58264017               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852725.125             456   7.58264017    
+  
+  EVENT          312 , RUN            1
+ #impact parameter,nlop,ncolt=   6.55073929               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852732.500             388   6.55073929    
+  
+  EVENT          313 , RUN            1
+ #impact parameter,nlop,ncolt=   11.1242390               0           0
+ #impact parameter,nlop,ncolt=   8.90324116               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852711.062             239   8.90324116    
+  
+  EVENT          314 , RUN            1
+ #impact parameter,nlop,ncolt=   8.14909554               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852711.812             498   8.14909554    
+  
+  EVENT          315 , RUN            1
+ #impact parameter,nlop,ncolt=   4.42366505               0          14
+ satisfied:EATT(GeV),NATT,B(fm)=   852740.812             902   4.42366505    
+  
+  EVENT          316 , RUN            1
+ #impact parameter,nlop,ncolt=   7.19572306               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.688             428   7.19572306    
+  
+  EVENT          317 , RUN            1
+ #impact parameter,nlop,ncolt=   9.51374531               0           0
+ #impact parameter,nlop,ncolt=   11.6885958               1           0
+ #impact parameter,nlop,ncolt=   11.4647417               2           0
+ #impact parameter,nlop,ncolt=   10.8314857               3           0
+ #impact parameter,nlop,ncolt=   10.7464466               4           0
+ #impact parameter,nlop,ncolt=   10.5644073               5           0
+ #impact parameter,nlop,ncolt=   9.38113689               6           0
+ #impact parameter,nlop,ncolt=   7.09411335               7           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.000             256   7.09411335    
+  
+  EVENT          318 , RUN            1
+ #impact parameter,nlop,ncolt=   6.72879505               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852654.062             457   6.72879505    
+  
+  EVENT          319 , RUN            1
+ #impact parameter,nlop,ncolt=   11.5528612               0           0
+ #impact parameter,nlop,ncolt=   11.0631504               1           0
+ #impact parameter,nlop,ncolt=   7.53932619               2           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.125             414   7.53932619    
+  
+  EVENT          320 , RUN            1
+ #impact parameter,nlop,ncolt=   8.03282642               0           0
+ #impact parameter,nlop,ncolt=   9.98365402               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852664.938             262   9.98365402    
+  
+  EVENT          321 , RUN            1
+ #impact parameter,nlop,ncolt=   11.5773764               0           0
+ #impact parameter,nlop,ncolt=   10.7299576               1           0
+ #impact parameter,nlop,ncolt=   8.63364124               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.375             228   8.63364124    
+  
+  EVENT          322 , RUN            1
+ #impact parameter,nlop,ncolt=   8.77253342               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.000             335   8.77253342    
+  
+  EVENT          323 , RUN            1
+ #impact parameter,nlop,ncolt=   11.5505695               0           0
+ #impact parameter,nlop,ncolt=   11.8149090               1           0
+ #impact parameter,nlop,ncolt=   7.58687687               2           0
+ #impact parameter,nlop,ncolt=   11.9502201               3           0
+ #impact parameter,nlop,ncolt=   10.1779118               4           0
+ #impact parameter,nlop,ncolt=   5.10731173               5           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852802.562             405   5.10731173    
+  
+  EVENT          324 , RUN            1
+ #impact parameter,nlop,ncolt=   7.81495428               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852725.250             395   7.81495428    
+  
+  EVENT          325 , RUN            1
+ #impact parameter,nlop,ncolt=   11.1974955               0           0
+ #impact parameter,nlop,ncolt=   9.81324100               1           0
+ #impact parameter,nlop,ncolt=   6.97749710               2           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.500             518   6.97749710    
+  
+  EVENT          326 , RUN            1
+ #impact parameter,nlop,ncolt=   9.43333054               0           0
+ #impact parameter,nlop,ncolt=   11.1061049               1           0
+ #impact parameter,nlop,ncolt=   11.2397766               2           0
+ #impact parameter,nlop,ncolt=   11.2788420               3           0
+ #impact parameter,nlop,ncolt=   8.08726025               4           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852712.250             269   8.08726025    
+  
+  EVENT          327 , RUN            1
+ #impact parameter,nlop,ncolt=   10.1913614               0           0
+ #impact parameter,nlop,ncolt=   3.34026527               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852725.562             671   3.34026527    
+  
+  EVENT          328 , RUN            1
+ #impact parameter,nlop,ncolt=   9.45413399               0           0
+ #impact parameter,nlop,ncolt=   1.58345211               1          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852707.688             913   1.58345211    
+  
+  EVENT          329 , RUN            1
+ #impact parameter,nlop,ncolt=   9.42620659               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.875             316   9.42620659    
+  
+  EVENT          330 , RUN            1
+ #impact parameter,nlop,ncolt=   10.5215616               0           0
+ #impact parameter,nlop,ncolt=   10.6482115               1           0
+ #impact parameter,nlop,ncolt=   11.7608051               2           0
+ #impact parameter,nlop,ncolt=   10.5843849               3           0
+ #impact parameter,nlop,ncolt=   10.9283495               4           0
+ #impact parameter,nlop,ncolt=   10.2875690               5           0
+ #impact parameter,nlop,ncolt=   6.55002403               6           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852722.062             674   6.55002403    
+  
+  EVENT          331 , RUN            1
+ #impact parameter,nlop,ncolt=   2.80427885               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852722.500             728   2.80427885    
+  
+  EVENT          332 , RUN            1
+ #impact parameter,nlop,ncolt=   2.73336554               0          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852770.812             833   2.73336554    
+  
+  EVENT          333 , RUN            1
+ #impact parameter,nlop,ncolt=   8.63642883               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.000             333   8.63642883    
+  
+  EVENT          334 , RUN            1
+ #impact parameter,nlop,ncolt=   6.60958290               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852750.312             484   6.60958290    
+  
+  EVENT          335 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9542694               0           0
+ #impact parameter,nlop,ncolt=   4.65009594               1           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852707.000             506   4.65009594    
+  
+  EVENT          336 , RUN            1
+ #impact parameter,nlop,ncolt=   8.75308609               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852715.500             445   8.75308609    
+  
+  EVENT          337 , RUN            1
+ #impact parameter,nlop,ncolt=   6.80823326               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.625             284   6.80823326    
+  
+  EVENT          338 , RUN            1
+ #impact parameter,nlop,ncolt=   9.69717026               0           0
+ #impact parameter,nlop,ncolt=   8.06050491               1           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852692.375             372   8.06050491    
+  
+  EVENT          339 , RUN            1
+ #impact parameter,nlop,ncolt=   3.20261335               0          16
+ satisfied:EATT(GeV),NATT,B(fm)=   852695.500             802   3.20261335    
+  
+  EVENT          340 , RUN            1
+ #impact parameter,nlop,ncolt=   3.92338419               0          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852733.625             786   3.92338419    
+  
+  EVENT          341 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6756754               0           0
+ #impact parameter,nlop,ncolt=   8.61370564               1           0
+ #impact parameter,nlop,ncolt=   10.6304016               2           0
+ #impact parameter,nlop,ncolt=   9.30730534               3           0
+ #impact parameter,nlop,ncolt=   2.19091272               4          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852458.250             772   2.19091272    
+  
+  EVENT          342 , RUN            1
+ #impact parameter,nlop,ncolt=   7.33111334               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852700.312             752   7.33111334    
+  
+  EVENT          343 , RUN            1
+ #impact parameter,nlop,ncolt=   9.47075653               0           0
+ #impact parameter,nlop,ncolt=   10.3496485               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.938             319   10.3496485    
+  
+  EVENT          344 , RUN            1
+ #impact parameter,nlop,ncolt=   6.07930994               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852711.062             398   6.07930994    
+  
+  EVENT          345 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2369843               0           0
+ #impact parameter,nlop,ncolt=   11.4016361               1           0
+ #impact parameter,nlop,ncolt=   5.67553616               2           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852691.625             449   5.67553616    
+  
+  EVENT          346 , RUN            1
+ #impact parameter,nlop,ncolt=   9.83554935               0           0
+ #impact parameter,nlop,ncolt=   7.70853281               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.125             307   7.70853281    
+  
+  EVENT          347 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0492105               0           0
+ #impact parameter,nlop,ncolt=   5.37376881               1           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.000             545   5.37376881    
+  
+  EVENT          348 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0112457               0           0
+ #impact parameter,nlop,ncolt=   9.84268093               1           0
+ #impact parameter,nlop,ncolt=   9.77668476               2           0
+ #impact parameter,nlop,ncolt=   11.0779943               3           0
+ #impact parameter,nlop,ncolt=   9.47136402               4           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852743.938             295   9.47136402    
+  
+  EVENT          349 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0055771               0           0
+ #impact parameter,nlop,ncolt=   9.09963226               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.312             253   9.09963226    
+  
+  EVENT          350 , RUN            1
+ #impact parameter,nlop,ncolt=   8.73527431               0           0
+ #impact parameter,nlop,ncolt=   2.74912119               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   853039.250             685   2.74912119    
+  
+  EVENT          351 , RUN            1
+ #impact parameter,nlop,ncolt=   6.31274462               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852680.500             444   6.31274462    
+  
+  EVENT          352 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0541315               0           0
+ #impact parameter,nlop,ncolt=   3.98042655               1          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852642.562             574   3.98042655    
+  
+  EVENT          353 , RUN            1
+ #impact parameter,nlop,ncolt=   6.14884377               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852709.375             446   6.14884377    
+  
+  EVENT          354 , RUN            1
+ #impact parameter,nlop,ncolt=   11.6462803               0           0
+ #impact parameter,nlop,ncolt=   11.3061724               1           0
+ #impact parameter,nlop,ncolt=   7.33085346               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852730.250             245   7.33085346    
+  
+  EVENT          355 , RUN            1
+ #impact parameter,nlop,ncolt=   11.4261055               0           0
+ #impact parameter,nlop,ncolt=   7.18478870               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852723.375             487   7.18478870    
+  
+  EVENT          356 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0988960               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.938             246   10.0988960    
+  
+  EVENT          357 , RUN            1
+ #impact parameter,nlop,ncolt=   7.46945095               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852718.688             352   7.46945095    
+  
+  EVENT          358 , RUN            1
+ #impact parameter,nlop,ncolt=   9.98607922               0           0
+ #impact parameter,nlop,ncolt=   9.04009628               1           0
+ #impact parameter,nlop,ncolt=   2.30493236               2          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852952.062             941   2.30493236    
+  
+  EVENT          359 , RUN            1
+ #impact parameter,nlop,ncolt=   1.59210122               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852632.750             671   1.59210122    
+  
+  EVENT          360 , RUN            1
+ #impact parameter,nlop,ncolt=   9.00739956               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.188             298   9.00739956    
+  
+  EVENT          361 , RUN            1
+ #impact parameter,nlop,ncolt=   5.42605352               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852704.938             395   5.42605352    
+  
+  EVENT          362 , RUN            1
+ #impact parameter,nlop,ncolt=   6.84933615               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.812             324   6.84933615    
+  
+  EVENT          363 , RUN            1
+ #impact parameter,nlop,ncolt=   5.18359327               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852715.875             448   5.18359327    
+  
+  EVENT          364 , RUN            1
+ #impact parameter,nlop,ncolt=   11.2879848               0           0
+ #impact parameter,nlop,ncolt=   5.77512693               1           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852722.812             487   5.77512693    
+  
+  EVENT          365 , RUN            1
+ #impact parameter,nlop,ncolt=   7.85558891               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.000             299   7.85558891    
+  
+  EVENT          366 , RUN            1
+ #impact parameter,nlop,ncolt=   6.37812805               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852726.938             569   6.37812805    
+  
+  EVENT          367 , RUN            1
+ #impact parameter,nlop,ncolt=   3.14710617               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852547.938             722   3.14710617    
+  
+  EVENT          368 , RUN            1
+ #impact parameter,nlop,ncolt=   10.7401638               0           0
+ #impact parameter,nlop,ncolt=   11.1875124               1           0
+ #impact parameter,nlop,ncolt=   10.6990891               2           0
+ #impact parameter,nlop,ncolt=   7.85997534               3           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852758.000             377   7.85997534    
+  
+  EVENT          369 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9141941               0           0
+ #impact parameter,nlop,ncolt=   11.9477034               1           0
+ #impact parameter,nlop,ncolt=   11.1654139               2           0
+ #impact parameter,nlop,ncolt=   11.1660271               3           0
+ #impact parameter,nlop,ncolt=   7.13617992               4           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.750             311   7.13617992    
+  
+  EVENT          370 , RUN            1
+ #impact parameter,nlop,ncolt=   2.78307366               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852790.250             691   2.78307366    
+  
+  EVENT          371 , RUN            1
+ #impact parameter,nlop,ncolt=   6.82163858               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852679.875             693   6.82163858    
+  
+  EVENT          372 , RUN            1
+ #impact parameter,nlop,ncolt=   9.77614784               0           0
+ #impact parameter,nlop,ncolt=   6.22060347               1           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.125             570   6.22060347    
+  
+  EVENT          373 , RUN            1
+ #impact parameter,nlop,ncolt=   3.46179485               0          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852659.125             683   3.46179485    
+  
+  EVENT          374 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3112526               0           0
+ #impact parameter,nlop,ncolt=   8.56478500               1           0
+ #impact parameter,nlop,ncolt=   9.09532452               2           0
+ #impact parameter,nlop,ncolt=   7.14369297               3           0
+ #impact parameter,nlop,ncolt=   10.4564810               4           0
+ #impact parameter,nlop,ncolt=   7.22645760               5           0
+ #impact parameter,nlop,ncolt=   9.45937061               6           0
+ #impact parameter,nlop,ncolt=   9.46515083               7           0
+ #impact parameter,nlop,ncolt=   6.38394690               8           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852704.625             255   6.38394690    
+  
+  EVENT          375 , RUN            1
+ #impact parameter,nlop,ncolt=   4.88726664               0          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852773.062             653   4.88726664    
+  
+  EVENT          376 , RUN            1
+ #impact parameter,nlop,ncolt=   6.85612726               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852622.562             286   6.85612726    
+  
+  EVENT          377 , RUN            1
+ #impact parameter,nlop,ncolt=   7.64767838               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852698.875             450   7.64767838    
+  
+  EVENT          378 , RUN            1
+ #impact parameter,nlop,ncolt=   9.90728855               0           0
+ #impact parameter,nlop,ncolt=   9.81440544               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852755.500             293   9.81440544    
+  
+  EVENT          379 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3455763               0           0
+ #impact parameter,nlop,ncolt=   4.66920137               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852761.188             682   4.66920137    
+  
+  EVENT          380 , RUN            1
+ #impact parameter,nlop,ncolt=   5.82882977               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852644.375             360   5.82882977    
+  
+  EVENT          381 , RUN            1
+ #impact parameter,nlop,ncolt=   9.77805042               0           0
+ #impact parameter,nlop,ncolt=   9.91700172               1           0
+ #impact parameter,nlop,ncolt=   9.32993698               2           0
+ #impact parameter,nlop,ncolt=   4.80201435               3           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852844.938             385   4.80201435    
+  
+  EVENT          382 , RUN            1
+ #impact parameter,nlop,ncolt=   8.58157253               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.750             272   8.58157253    
+  
+  EVENT          383 , RUN            1
+ #impact parameter,nlop,ncolt=   8.81005478               0           0
+ #impact parameter,nlop,ncolt=   10.9458065               1           0
+ #impact parameter,nlop,ncolt=   8.01267529               2           0
+ #impact parameter,nlop,ncolt=   4.75095606               3          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852745.438             625   4.75095606    
+  
+  EVENT          384 , RUN            1
+ #impact parameter,nlop,ncolt=   9.54223061               0           0
+ #impact parameter,nlop,ncolt=   9.23016548               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852738.562             263   9.23016548    
+  
+  EVENT          385 , RUN            1
+ #impact parameter,nlop,ncolt=   4.46904421               0          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852627.688             684   4.46904421    
+  
+  EVENT          386 , RUN            1
+ #impact parameter,nlop,ncolt=   8.65452862               0           0
+ #impact parameter,nlop,ncolt=   11.5056419               1           0
+ #impact parameter,nlop,ncolt=   11.5649948               2           0
+ #impact parameter,nlop,ncolt=   11.6287432               3           0
+ #impact parameter,nlop,ncolt=   10.1062126               4           0
+ #impact parameter,nlop,ncolt=   11.7403965               5           0
+ #impact parameter,nlop,ncolt=   8.25532341               6           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.625             248   8.25532341    
+  
+  EVENT          387 , RUN            1
+ #impact parameter,nlop,ncolt=   9.05732822               0           0
+ #impact parameter,nlop,ncolt=   9.49113464               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852730.938             255   9.49113464    
+  
+  EVENT          388 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0206118               0           0
+ #impact parameter,nlop,ncolt=   10.5891304               1           0
+ #impact parameter,nlop,ncolt=   4.19204187               2           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852715.500             477   4.19204187    
+  
+  EVENT          389 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9078331               0           0
+ #impact parameter,nlop,ncolt=   5.86170053               1           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852759.438             640   5.86170053    
+  
+  EVENT          390 , RUN            1
+ #impact parameter,nlop,ncolt=   9.55311394               0           0
+ #impact parameter,nlop,ncolt=   9.33834743               1           0
+ #impact parameter,nlop,ncolt=   11.6812458               2           0
+ #impact parameter,nlop,ncolt=   4.06320953               3          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852582.688             602   4.06320953    
+  
+  EVENT          391 , RUN            1
+ #impact parameter,nlop,ncolt=   8.45109749               0           0
+ #impact parameter,nlop,ncolt=   4.59978485               1          10
+ satisfied:EATT(GeV),NATT,B(fm)=   853066.500             555   4.59978485    
+  
+  EVENT          392 , RUN            1
+ #impact parameter,nlop,ncolt=   10.5170298               0           0
+ #impact parameter,nlop,ncolt=   5.22220564               1           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852689.625             571   5.22220564    
+  
+  EVENT          393 , RUN            1
+ #impact parameter,nlop,ncolt=   11.8724051               0           0
+ #impact parameter,nlop,ncolt=   10.3628693               1           0
+ #impact parameter,nlop,ncolt=   4.36218548               2           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.938             425   4.36218548    
+  
+  EVENT          394 , RUN            1
+ #impact parameter,nlop,ncolt=   8.15763474               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852690.312             268   8.15763474    
+  
+  EVENT          395 , RUN            1
+ #impact parameter,nlop,ncolt=   11.2884426               0           0
+ #impact parameter,nlop,ncolt=   5.31217241               1           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852690.625             557   5.31217241    
+  
+  EVENT          396 , RUN            1
+ #impact parameter,nlop,ncolt=   9.47401905               0           0
+ #impact parameter,nlop,ncolt=   11.7826891               1           0
+ #impact parameter,nlop,ncolt=   11.7005692               2           0
+ #impact parameter,nlop,ncolt=   5.36936522               3           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852691.688             874   5.36936522    
+  
+  EVENT          397 , RUN            1
+ #impact parameter,nlop,ncolt=   3.61452198               0          13
+ satisfied:EATT(GeV),NATT,B(fm)=   852965.750             844   3.61452198    
+  
+  EVENT          398 , RUN            1
+ #impact parameter,nlop,ncolt=   8.51007366               0           0
+ #impact parameter,nlop,ncolt=   8.72320843               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852809.938             290   8.72320843    
+  
+  EVENT          399 , RUN            1
+ #impact parameter,nlop,ncolt=   7.78411293               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852727.688             279   7.78411293    
+  
+  EVENT          400 , RUN            1
+ #impact parameter,nlop,ncolt=   9.50295258               0           0
+ #impact parameter,nlop,ncolt=   6.67506504               1           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852442.750             394   6.67506504    
+  
+  EVENT          401 , RUN            1
+ #impact parameter,nlop,ncolt=   6.96844244               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852714.312             546   6.96844244    
+  
+  EVENT          402 , RUN            1
+ #impact parameter,nlop,ncolt=   7.56830549               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852713.875             274   7.56830549    
+  
+  EVENT          403 , RUN            1
+ #impact parameter,nlop,ncolt=   5.22808647               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.938             346   5.22808647    
+  
+  EVENT          404 , RUN            1
+ #impact parameter,nlop,ncolt=   9.90693283               0           0
+ #impact parameter,nlop,ncolt=   9.99961853               1           0
+ #impact parameter,nlop,ncolt=   3.33732939               2          17
+ satisfied:EATT(GeV),NATT,B(fm)=   852305.625            1039   3.33732939    
+  
+  EVENT          405 , RUN            1
+ #impact parameter,nlop,ncolt=   1.58565128               0           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852694.688             842   1.58565128    
+  
+  EVENT          406 , RUN            1
+ #impact parameter,nlop,ncolt=   6.21781301               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852694.375             676   6.21781301    
+  
+  EVENT          407 , RUN            1
+ #impact parameter,nlop,ncolt=   9.92683601               0           0
+ #impact parameter,nlop,ncolt=   4.78832483               1           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852698.188             526   4.78832483    
+  
+  EVENT          408 , RUN            1
+ #impact parameter,nlop,ncolt=   9.74323559               0           0
+ #impact parameter,nlop,ncolt=   7.12358570               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852677.000             330   7.12358570    
+  
+  EVENT          409 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2788820               0           0
+ #impact parameter,nlop,ncolt=   10.7652979               1           0
+ #impact parameter,nlop,ncolt=   11.5786695               2           0
+ #impact parameter,nlop,ncolt=   10.0727558               3           0
+ #impact parameter,nlop,ncolt=   7.98889208               4           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.250             430   7.98889208    
+  
+  EVENT          410 , RUN            1
+ #impact parameter,nlop,ncolt=   1.97387898               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852486.562             466   1.97387898    
+  
+  EVENT          411 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6754560               0           0
+ #impact parameter,nlop,ncolt=   5.45266724               1           9
+ satisfied:EATT(GeV),NATT,B(fm)=   852723.688             876   5.45266724    
+  
+  EVENT          412 , RUN            1
+ #impact parameter,nlop,ncolt=   4.32406378               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852713.438             820   4.32406378    
+  
+  EVENT          413 , RUN            1
+ #impact parameter,nlop,ncolt=   8.37817478               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852704.625             296   8.37817478    
+  
+  EVENT          414 , RUN            1
+ #impact parameter,nlop,ncolt=   5.18782711               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852727.625             674   5.18782711    
+  
+  EVENT          415 , RUN            1
+ #impact parameter,nlop,ncolt=   4.64063263               0          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852625.750             594   4.64063263    
+  
+  EVENT          416 , RUN            1
+ #impact parameter,nlop,ncolt=   3.17442417               0          17
+ satisfied:EATT(GeV),NATT,B(fm)=   854151.625             714   3.17442417    
+  
+  EVENT          417 , RUN            1
+ #impact parameter,nlop,ncolt=   2.23745275               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852626.188             918   2.23745275    
+  
+  EVENT          418 , RUN            1
+ #impact parameter,nlop,ncolt=   5.11473417               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852686.750             668   5.11473417    
+  
+  EVENT          419 , RUN            1
+ #impact parameter,nlop,ncolt=   7.63917112               0           0
+ #impact parameter,nlop,ncolt=   8.31433964               1           0
+ #impact parameter,nlop,ncolt=   8.52185822               2           0
+ #impact parameter,nlop,ncolt=   5.87718391               3           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852748.750             356   5.87718391    
+  
+  EVENT          420 , RUN            1
+ #impact parameter,nlop,ncolt=   11.2901077               0           0
+ #impact parameter,nlop,ncolt=   11.6440840               1           0
+ #impact parameter,nlop,ncolt=   7.75732327               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852677.312             251   7.75732327    
+  
+  EVENT          421 , RUN            1
+ #impact parameter,nlop,ncolt=   3.67509890               0          12
+ satisfied:EATT(GeV),NATT,B(fm)=   852675.188             832   3.67509890    
+  
+  EVENT          422 , RUN            1
+ #impact parameter,nlop,ncolt=   11.1239443               0           0
+ #impact parameter,nlop,ncolt=   7.31732512               1           0
+ #impact parameter,nlop,ncolt=   10.1693354               2           0
+ #impact parameter,nlop,ncolt=   9.49672318               3           0
+ #impact parameter,nlop,ncolt=   2.53269410               4          14
+ satisfied:EATT(GeV),NATT,B(fm)=   852662.875             940   2.53269410    
+  
+  EVENT          423 , RUN            1
+ #impact parameter,nlop,ncolt=   5.26243305               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.125             506   5.26243305    
+  
+  EVENT          424 , RUN            1
+ #impact parameter,nlop,ncolt=   9.28543472               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.125             264   9.28543472    
+  
+  EVENT          425 , RUN            1
+ #impact parameter,nlop,ncolt=   4.94566631               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852726.500             625   4.94566631    
+  
+  EVENT          426 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6213856               0           0
+ #impact parameter,nlop,ncolt=   2.61607814               1          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852699.062             582   2.61607814    
+  
+  EVENT          427 , RUN            1
+ #impact parameter,nlop,ncolt=   6.23035097               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852676.125             703   6.23035097    
+  
+  EVENT          428 , RUN            1
+ #impact parameter,nlop,ncolt=  0.327653825               0          15
+ satisfied:EATT(GeV),NATT,B(fm)=   854301.062             864  0.327653825    
+  
+  EVENT          429 , RUN            1
+ #impact parameter,nlop,ncolt=   7.49666691               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.000             319   7.49666691    
+  
+  EVENT          430 , RUN            1
+ #impact parameter,nlop,ncolt=   6.65499926               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852739.688             295   6.65499926    
+  
+  EVENT          431 , RUN            1
+ #impact parameter,nlop,ncolt=   8.35913944               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.500             340   8.35913944    
+  
+  EVENT          432 , RUN            1
+ #impact parameter,nlop,ncolt=   10.2479954               0           0
+ #impact parameter,nlop,ncolt=   9.82066250               1           0
+ #impact parameter,nlop,ncolt=   5.81968403               2           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852863.562             639   5.81968403    
+  
+  EVENT          433 , RUN            1
+ #impact parameter,nlop,ncolt=   9.19933796               0           0
+ #impact parameter,nlop,ncolt=   3.52162576               1          11
+ satisfied:EATT(GeV),NATT,B(fm)=   853209.375             535   3.52162576    
+  
+  EVENT          434 , RUN            1
+ #impact parameter,nlop,ncolt=   6.91636610               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852705.750             699   6.91636610    
+  
+  EVENT          435 , RUN            1
+ #impact parameter,nlop,ncolt=   9.68493652               0           0
+ #impact parameter,nlop,ncolt=   11.6275892               1           0
+ #impact parameter,nlop,ncolt=   7.68635654               2           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852731.875             287   7.68635654    
+  
+  EVENT          436 , RUN            1
+ #impact parameter,nlop,ncolt=   8.20551872               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852621.938             291   8.20551872    
+  
+  EVENT          437 , RUN            1
+ #impact parameter,nlop,ncolt=   6.23991537               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852709.375             560   6.23991537    
+  
+  EVENT          438 , RUN            1
+ #impact parameter,nlop,ncolt=   9.03420639               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852669.562             329   9.03420639    
+  
+  EVENT          439 , RUN            1
+ #impact parameter,nlop,ncolt=   6.91571569               0           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852611.312             389   6.91571569    
+  
+  EVENT          440 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9719477               0           0
+ #impact parameter,nlop,ncolt=   7.28983021               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852774.250             387   7.28983021    
+  
+  EVENT          441 , RUN            1
+ #impact parameter,nlop,ncolt=   11.7237701               0           0
+ #impact parameter,nlop,ncolt=   10.8085327               1           0
+ #impact parameter,nlop,ncolt=   10.7696857               2           0
+ #impact parameter,nlop,ncolt=   5.86449671               3           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852697.750             333   5.86449671    
+  
+  EVENT          442 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0308313               0           0
+ #impact parameter,nlop,ncolt=   7.78614616               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852561.625             423   7.78614616    
+  
+  EVENT          443 , RUN            1
+ #impact parameter,nlop,ncolt=   5.99065161               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852783.500             396   5.99065161    
+  
+  EVENT          444 , RUN            1
+ #impact parameter,nlop,ncolt=   9.52620506               0           0
+ #impact parameter,nlop,ncolt=   11.2746315               1           0
+ #impact parameter,nlop,ncolt=   11.8430424               2           0
+ #impact parameter,nlop,ncolt=   5.77789927               3           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.562             491   5.77789927    
+  
+  EVENT          445 , RUN            1
+ #impact parameter,nlop,ncolt=   10.9050713               0           0
+ #impact parameter,nlop,ncolt=   8.36163425               1           0
+ #impact parameter,nlop,ncolt=   8.50555038               2           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852692.312             271   8.50555038    
+  
+  EVENT          446 , RUN            1
+ #impact parameter,nlop,ncolt=   8.81940269               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852734.625             272   8.81940269    
+  
+  EVENT          447 , RUN            1
+ #impact parameter,nlop,ncolt=   7.58564854               0           0
+ #impact parameter,nlop,ncolt=   3.51591301               1           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852767.750             521   3.51591301    
+  
+  EVENT          448 , RUN            1
+ #impact parameter,nlop,ncolt=   9.65922165               0           0
+ #impact parameter,nlop,ncolt=   9.71420193               1           0
+ #impact parameter,nlop,ncolt=   11.2316074               2           0
+ #impact parameter,nlop,ncolt=   5.41808796               3           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852737.000             498   5.41808796    
+  
+  EVENT          449 , RUN            1
+ #impact parameter,nlop,ncolt=   5.96456480               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852688.312             394   5.96456480    
+  
+  EVENT          450 , RUN            1
+ #impact parameter,nlop,ncolt=   11.9903975               0           0
+ #impact parameter,nlop,ncolt=   5.61448002               1           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852746.250             411   5.61448002    
+  
+  EVENT          451 , RUN            1
+ #impact parameter,nlop,ncolt=   5.48442173               0           8
+ satisfied:EATT(GeV),NATT,B(fm)=   852726.312             530   5.48442173    
+  
+  EVENT          452 , RUN            1
+ #impact parameter,nlop,ncolt=   9.16825390               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852732.750             232   9.16825390    
+  
+  EVENT          453 , RUN            1
+ #impact parameter,nlop,ncolt=   10.7906227               0           0
+ #impact parameter,nlop,ncolt=   7.32334232               1           0
+ #impact parameter,nlop,ncolt=   11.0586395               2           0
+ #impact parameter,nlop,ncolt=   9.85641098               3           0
+ #impact parameter,nlop,ncolt=   10.4158335               4           0
+ #impact parameter,nlop,ncolt=   9.45855618               5           0
+ #impact parameter,nlop,ncolt=   7.61282539               6           0
+ #impact parameter,nlop,ncolt=   6.21118641               7           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852692.250             488   6.21118641    
+  
+  EVENT          454 , RUN            1
+ #impact parameter,nlop,ncolt=   11.1346750               0           0
+ #impact parameter,nlop,ncolt=   10.1074047               1           0
+ #impact parameter,nlop,ncolt=   6.37488937               2           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852706.625             483   6.37488937    
+  
+  EVENT          455 , RUN            1
+ #impact parameter,nlop,ncolt=   10.5301199               0           0
+ #impact parameter,nlop,ncolt=   8.27240372               1           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.312             350   8.27240372    
+  
+  EVENT          456 , RUN            1
+ #impact parameter,nlop,ncolt=   10.9896040               0           0
+ #impact parameter,nlop,ncolt=   6.90109539               1           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852717.625             504   6.90109539    
+  
+  EVENT          457 , RUN            1
+ #impact parameter,nlop,ncolt=   4.69199133               0          15
+ satisfied:EATT(GeV),NATT,B(fm)=   852465.312             872   4.69199133    
+  
+  EVENT          458 , RUN            1
+ #impact parameter,nlop,ncolt=   5.46224499               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852866.625             754   5.46224499    
+  
+  EVENT          459 , RUN            1
+ #impact parameter,nlop,ncolt=   10.4341831               0           0
+ #impact parameter,nlop,ncolt=   11.3299417               1           0
+ #impact parameter,nlop,ncolt=   11.8118343               2           0
+ #impact parameter,nlop,ncolt=   4.08001852               3          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.562             752   4.08001852    
+  
+  EVENT          460 , RUN            1
+ #impact parameter,nlop,ncolt=   6.64251852               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852707.125             472   6.64251852    
+  
+  EVENT          461 , RUN            1
+ #impact parameter,nlop,ncolt=   8.66606140               0           0
+ #impact parameter,nlop,ncolt=   10.9611826               1           0
+ #impact parameter,nlop,ncolt=   11.1197548               2           0
+ #impact parameter,nlop,ncolt=   2.05563879               3          14
+ satisfied:EATT(GeV),NATT,B(fm)=   852641.750             848   2.05563879    
+  
+  EVENT          462 , RUN            1
+ #impact parameter,nlop,ncolt=   8.22336674               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852693.812             264   8.22336674    
+  
+  EVENT          463 , RUN            1
+ #impact parameter,nlop,ncolt=   5.07639027               0           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852731.750             495   5.07639027    
+  
+  EVENT          464 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6709757               0           0
+ #impact parameter,nlop,ncolt=   11.6612682               1           0
+ #impact parameter,nlop,ncolt=   9.71997070               2           0
+ #impact parameter,nlop,ncolt=   6.67964888               3           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852796.000             443   6.67964888    
+  
+  EVENT          465 , RUN            1
+ #impact parameter,nlop,ncolt=   9.42020798               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.000             249   9.42020798    
+  
+  EVENT          466 , RUN            1
+ #impact parameter,nlop,ncolt=   10.3652773               0           0
+ #impact parameter,nlop,ncolt=   10.6939278               1           0
+ #impact parameter,nlop,ncolt=   11.9343691               2           0
+ #impact parameter,nlop,ncolt=   5.02604628               3          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852706.625             892   5.02604628    
+  
+  EVENT          467 , RUN            1
+ #impact parameter,nlop,ncolt=   8.76242065               0           0
+ #impact parameter,nlop,ncolt=   10.2747126               1           0
+ #impact parameter,nlop,ncolt=   9.23229980               2           0
+ #impact parameter,nlop,ncolt=   2.88719177               3           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852671.562             377   2.88719177    
+  
+  EVENT          468 , RUN            1
+ #impact parameter,nlop,ncolt=   4.75462198               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   852673.125             483   4.75462198    
+  
+  EVENT          469 , RUN            1
+ #impact parameter,nlop,ncolt=   10.4422874               0           0
+ #impact parameter,nlop,ncolt=   10.6875963               1           0
+ #impact parameter,nlop,ncolt=   8.20557690               2           0
+ #impact parameter,nlop,ncolt=   8.86731720               3           0
+ #impact parameter,nlop,ncolt=   11.1377439               4           0
+ #impact parameter,nlop,ncolt=   11.6702394               5           0
+ #impact parameter,nlop,ncolt=   7.46425486               6           2
+ satisfied:EATT(GeV),NATT,B(fm)=   852720.250             265   7.46425486    
+  
+  EVENT          470 , RUN            1
+ #impact parameter,nlop,ncolt=   8.17029476               0           0
+ #impact parameter,nlop,ncolt=   10.6208944               1           0
+ #impact parameter,nlop,ncolt=   10.0086756               2           0
+ #impact parameter,nlop,ncolt=   6.30160999               3           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852933.562             847   6.30160999    
+  
+  EVENT          471 , RUN            1
+ #impact parameter,nlop,ncolt=   11.2675734               0           0
+ #impact parameter,nlop,ncolt=   2.72999096               1          14
+ satisfied:EATT(GeV),NATT,B(fm)=   852722.625             697   2.72999096    
+  
+  EVENT          472 , RUN            1
+ #impact parameter,nlop,ncolt=   11.5979462               0           0
+ #impact parameter,nlop,ncolt=   10.2647438               1           0
+ #impact parameter,nlop,ncolt=   9.09013653               2           0
+ #impact parameter,nlop,ncolt=   7.91760921               3           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852731.312             271   7.91760921    
+  
+  EVENT          473 , RUN            1
+ #impact parameter,nlop,ncolt=   6.75485039               0           4
+ satisfied:EATT(GeV),NATT,B(fm)=   854579.750             363   6.75485039    
+  
+  EVENT          474 , RUN            1
+ #impact parameter,nlop,ncolt=   7.95872021               0           0
+ #impact parameter,nlop,ncolt=   10.4158020               1           0
+ #impact parameter,nlop,ncolt=   3.18745160               2          11
+ satisfied:EATT(GeV),NATT,B(fm)=   852841.250             756   3.18745160    
+  
+  EVENT          475 , RUN            1
+ #impact parameter,nlop,ncolt=   1.64697433               0          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852661.000             726   1.64697433    
+  
+  EVENT          476 , RUN            1
+ #impact parameter,nlop,ncolt=   5.98352385               0           6
+ satisfied:EATT(GeV),NATT,B(fm)=   852716.125             544   5.98352385    
+  
+  EVENT          477 , RUN            1
+ #impact parameter,nlop,ncolt=   10.6529446               0           0
+ #impact parameter,nlop,ncolt=   6.00374699               1          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852676.688            1079   6.00374699    
+  
+  EVENT          478 , RUN            1
+ #impact parameter,nlop,ncolt=   10.4788952               0           0
+ #impact parameter,nlop,ncolt=   10.5868711               1           0
+ #impact parameter,nlop,ncolt=   6.12079239               2           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852689.125             703   6.12079239    
+  
+  EVENT          479 , RUN            1
+ #impact parameter,nlop,ncolt=   11.0412283               0           0
+ #impact parameter,nlop,ncolt=   7.19155169               1           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852684.188             641   7.19155169    
+  
+  EVENT          480 , RUN            1
+ #impact parameter,nlop,ncolt=   7.09061861               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852710.750             489   7.09061861    
+  
+  EVENT          481 , RUN            1
+ #impact parameter,nlop,ncolt=   11.5038528               0           0
+ #impact parameter,nlop,ncolt=   3.99702573               1          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852665.500             722   3.99702573    
+  
+  EVENT          482 , RUN            1
+ #impact parameter,nlop,ncolt=   10.0088215               0           0
+ #impact parameter,nlop,ncolt=   5.38081741               1          10
+ satisfied:EATT(GeV),NATT,B(fm)=   852715.500             633   5.38081741    
+  
+  EVENT          483 , RUN            1
+ #impact parameter,nlop,ncolt=   8.30687046               0           3
+ satisfied:EATT(GeV),NATT,B(fm)=   852771.250             338   8.30687046    
+  
+  EVENT          484 , RUN            1
+ #impact parameter,nlop,ncolt=   11.3596601               0           0
+ #impact parameter,nlop,ncolt=   11.1547279               1           0
+ #impact parameter,nlop,ncolt=  0.629657924               2          12
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|        1103   4867.7211914062500       -4867.7217716838350       -5.6492593325674534     
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|        1104   4867.7211914062500       -4867.7217716838350       -5.6492593325674534     
+ satisfied:EATT(GeV),NATT,B(fm)=   852666.562             710  0.629657924    
+  
+  EVENT          485 , RUN            1
+ #impact parameter,nlop,ncolt=   5.90093470               0           6
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|         952   3877.1218261718750       -3877.1222883608134       -3.5839258562773466     
+ 2:I,ft5<|gz5|, reset ft5 to |gz5|         953   3877.1218261718750       -3877.1222883608134       -3.5839258562773466     
+ satisfied:EATT(GeV),NATT,B(fm)=   852674.562             634   5.90093470    
+  
+  EVENT          486 , RUN            1
+ #impact parameter,nlop,ncolt=   4.85526562               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852712.688             644   4.85526562    
+  
+  EVENT          487 , RUN            1
+ #impact parameter,nlop,ncolt=   8.39192390               0           1
+ satisfied:EATT(GeV),NATT,B(fm)=   852719.562             224   8.39192390    
+  
+  EVENT          488 , RUN            1
+ #impact parameter,nlop,ncolt=   5.73323298               0           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852641.000             637   5.73323298    
+  
+  EVENT          489 , RUN            1
+ #impact parameter,nlop,ncolt=   11.2267609               0           0
+ #impact parameter,nlop,ncolt=   8.68384075               1           0
+ #impact parameter,nlop,ncolt=   5.92329216               2           7
+ satisfied:EATT(GeV),NATT,B(fm)=   852936.250             835   5.92329216    
+  
+  EVENT          490 , RUN            1
+ #impact parameter,nlop,ncolt=   10.9323282               0           0
+ #impact parameter,nlop,ncolt=   6.20531893               1           5
+ satisfied:EATT(GeV),NATT,B(fm)=   852721.188             561   6.20531893    
+  
+  EVENT          491 , RUN            1
+ #impact parameter,nlop,ncolt=   1.39460516               0          10
+gw343.vampire
+#  AMPT started at  Tue Oct 1 14:34:53 CDT 2019
+#  AMPT Program finished at  Tue Oct 1 15:15:01 CDT 2019

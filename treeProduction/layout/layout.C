@@ -1,6 +1,6 @@
 void layout(){
 
-   const int A_max = 12;
+   const int A_max = 208;
    float x_projectile[A_max];
    float y_projectile[A_max];
    float status_projectile[A_max];
@@ -20,7 +20,7 @@ void layout(){
    float yMean_target=0;
 
    ifstream inFile;
-   inFile.open("npart-xy_16.dat");
+   inFile.open("npart-xy.dat");
    inFile>>nEvent; 
    inFile>>tmp; 
    inFile>>nA_projectile; 
@@ -63,11 +63,11 @@ void layout(){
   //c1->Divide(2,1,0,0);
   gStyle->SetOptStat(0);
   c1->SetTicks(-1);
- TH1D* hist = new TH1D("hist","",200,-10.,10.0);
+ TH1D* hist = new TH1D("hist","",200,-15.,15.0);
  hist->SetXTitle("x (fm)");
  hist->SetYTitle("y (fm)");
- hist->SetMinimum(-10);
- hist->SetMaximum(10);
+ hist->SetMinimum(-15);
+ hist->SetMaximum(15);
  hist->GetXaxis()->CenterTitle(1);
  hist->GetYaxis()->CenterTitle(1);
  hist->GetYaxis()->SetTitleOffset(1.1);
@@ -76,15 +76,15 @@ void layout(){
  hist->GetYaxis()->SetTitleSize(0.066);
  hist->GetXaxis()->SetLabelSize(0.05);
  hist->GetYaxis()->SetLabelSize(0.05);
- hist->Draw(" ");
+ hist->Draw();
 
-   TEllipse *projectile = new TEllipse(xMean_projectile, yMean_projectile, 2.75);;
+   TEllipse *projectile = new TEllipse(xMean_projectile, yMean_projectile, 0.9);;
    projectile->SetLineWidth(2);
    projectile->SetLineColor(1);
    projectile->SetLineStyle(2);
    projectile->SetFillStyle(0);
    projectile->Draw("Lfsame");
-   TEllipse *target = new TEllipse(xMean_target, yMean_target, 2.75);;
+   TEllipse *target = new TEllipse(xMean_target, yMean_target, 6.7);;
    target->SetLineWidth(2);
    target->SetLineColor(4);
    target->SetLineStyle(2);
@@ -128,14 +128,14 @@ void layout(){
      nucleon_target[i]->Draw("Lfsame");
    }
 
-    TLatex *tex1= new TLatex(-6.6,7.0,"C+C @ 7.0 TeV, b = 4.3 fm");
+    TLatex *tex1= new TLatex(-10.6,10.0,"p+Pb @ 5.0 TeV, b = 2.37 fm");
     tex1->SetTextColor(1);
     tex1->SetTextSize(0.05);
     tex1->SetTextFont(42);
     tex1->Draw();
 
-   c1->SaveAs("plot_CCcollision_layout.png");
-   c1->SaveAs("plot_CCcollision_layout.pdf");
+   c1->SaveAs("plot_pPbcollision_layout.png");
+   c1->SaveAs("plot_pPbcollision_layout.pdf");
 
 }
 
