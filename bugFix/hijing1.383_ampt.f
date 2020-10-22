@@ -317,8 +317,6 @@ clin-4/26/01 lepton and photon info:
 cc      SAVE /NOPREC/
 
 c-tuo-prichard-2020
-        LOGICAL NotConservedFlag
-        COMMON /NotConservedFlagHIJING/NotConservedFlag
         integer :: tmpIOS
         character(len=300) :: tmpLINE
 
@@ -1937,16 +1935,10 @@ clin-4/19/01 soft3:
  565    continue
 
         DENGY=EATT/(IHNT2(1)*HINT1(6)+IHNT2(3)*HINT1(7))-1.0
-
-c-tuo-prichard-2020
-        NotConservedFlag=ABS(DENGY).GT.0.0005.AND.IHPR2(20).NE.0
-     &       .AND.(IHPR2(21).EQ.0).AND.(IHPR2(10).NE.0)
-
-cc        IF(ABS(DENGY).GT.HIPR1(43).AND.IHPR2(20).NE.0
-cc     &     .AND.IHPR2(21).EQ.0) THEN
-cc         IF(IHPR2(10).NE.0) 
-       IF(NotConservedFlag) THEN
-         WRITE(6,*) 'Energy not conserved, repeat the event'
+        IF(ABS(DENGY).GT.HIPR1(43).AND.IHPR2(20).NE.0
+     &     .AND.IHPR2(21).EQ.0) THEN
+         IF(IHPR2(10).NE.0)
+     &        WRITE(6,*) 'Energy not conserved, repeat the event'
 c                call lulist(1)
          write(6,*) 'violated:EATT(GeV),NATT,B(fm)=',EATT,NATT,bimp
 
@@ -1957,7 +1949,6 @@ c-tuo-prichard-2020
          OPEN (100,FILE='ana/tmp2parton-initial-afterPropagation.dat',
      1        STATUS = 'OLD')
          close(100,status='DELETE')
-
 
          GO TO 50
 
@@ -1974,7 +1965,7 @@ c-tuo-prichard-2020
 
          do while (.true.)
           read(100, '(A)', iostat=tmpIOS) tmpLINE
-          if(tmpIOS /= 0) then 
+          if(tmpIOS /= 0) then
            write(6,'(A)') "tmpLINE Stopped"
            exit
           endif
@@ -1982,10 +1973,11 @@ c-tuo-prichard-2020
 
          enddo
          CLOSE(100, status='delete')
-        ENDIF
 
+        ENDIF
         write(6,*) 'satisfied:EATT(GeV),NATT,B(fm)=',EATT,NATT,bimp
         write(6,*) ' '
+
 
 c
 clin-4/2012 write out initial transverse positions of initial nucleons:

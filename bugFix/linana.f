@@ -400,10 +400,6 @@ c      DOUBLE PRECISION  vxp0,vyp0,vzp0
 c      common /precpa/ vxp0(MAXPTN), vyp0(MAXPTN), vzp0(MAXPTN)
 cc      SAVE /precpa/
 
-c-tuo-prichard-2020
-c      LOGICAL NotConservedFlag
-c      COMMON /NotConservedFlagHIJING/NotConservedFlag
-
       common /para7/ ioscar,nsmbbbar,nsmmeson
       COMMON /AREVT/ IAEVT, IARUN, MISS
       common/snn/efrm,npart1,npart2,epsiPz,epsiPt,PZPROJ,PZTARG
