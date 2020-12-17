@@ -1,5 +1,5 @@
 AMPT Users' Guide
- 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 12/2018 test version v1.26t9b/v2.26t9b:
      * Fixed bugs that can cause segmentation fault (especially for default
