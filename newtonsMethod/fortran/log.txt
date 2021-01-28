@@ -1,0 +1,7 @@
+
+module load PGI
+
+
+gfortran txt.f -o exe
+
+
